@@ -66,6 +66,17 @@
 
   html {
     scroll-behavior: smooth;
+    /* Hide the scrollbar without disabling scrolling — keyboard, wheel and
+       touch all still work, the gutter just isn't painted. */
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* legacy Edge */
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
   }
 
   body {
