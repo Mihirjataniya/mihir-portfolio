@@ -1,0 +1,95 @@
+import ImageSlot from "@/components/ImageSlot";
+import { masthead } from "@/data/issue";
+
+/** Lead editorial: the opinion column plus the editor's portrait. */
+export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean }) {
+  return (
+    <section id="desk">
+      <div className="kicker mb-[11px]">From the desk</div>
+
+      <div className="frame grid grid-cols-1 gap-[clamp(18px,2.4vw,30px)] px-[clamp(16px,2vw,26px)] pt-[clamp(16px,1.9vw,24px)] pb-[clamp(16px,1.7vw,22px)] p600:grid-cols-[minmax(0,1fr)_clamp(208px,31%,336px)]">
+        <div className="min-w-0">
+          <h2 className="font-display text-[clamp(26px,3.05vw,40px)] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
+            I keep choosing the harder infrastructure.
+          </h2>
+
+          <p className="mt-[18px] font-mono text-[13px] leading-[1.78] text-ink-3 italic">
+            It&apos;s slower. Messier. Usually invisible.
+            <br />
+            But it compounds. Interfaces can be rebuilt.
+            <br />
+            Plumbing, once ignored, leaks everywhere.
+          </p>
+
+          <p className="mt-[17px] font-mono text-[12.5px] leading-[1.7] text-ink-3">
+            Right now I care more about systems that don&apos;t break under load, async work that
+            survives failure, and APIs that don&apos;t become regrets.
+          </p>
+
+          <p className="mt-[14px] font-mono text-[12.5px] leading-[1.7] text-ink-3">
+            Maybe it&apos;s irrational. Maybe it&apos;s just stubborn.
+          </p>
+
+          <div className="mt-[22px] grid gap-[3px] font-display text-[14.5px] text-ink-2 italic">
+            <div>&mdash; {masthead.author}</div>
+            <div>{masthead.city}</div>
+            <div>{masthead.date}</div>
+          </div>
+
+          <div className="mt-5 flex justify-center">
+            <a
+              href={masthead.resumeHref}
+              className="press-btn gap-[10px] px-[18px] py-[10px] text-[12px] tracking-[0.09em]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="14"
+                height="14"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M14 3H7a1 1 0 00-1 1v16a1 1 0 001 1h10a1 1 0 001-1V7z" />
+                <path d="M14 3v4h4" />
+              </svg>
+              <span>
+                Resume.pdf <span className="press-btn-mute text-ink-mute">(latest)</span>
+              </span>
+            </a>
+          </div>
+        </div>
+
+        <div className="relative mx-auto w-full min-w-0 max-w-[320px] p600:mx-0 p600:max-w-none">
+          <div className="border border-dashed border-[rgba(20,18,15,0.55)] bg-[rgba(20,18,15,0.03)] p-[6px]">
+            <div className="relative aspect-[4/4.6] overflow-hidden">
+              <ImageSlot placeholder="Portrait photo" alt="Portrait of Mihir Jataniya" priority />
+              <div className="halftone opacity-30" />
+            </div>
+          </div>
+
+          {showStamp ? <Stamp /> : null}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Rubber stamp pressed into the lower corner of the portrait. */
+function Stamp() {
+  return (
+    <div
+      aria-hidden="true"
+      className="absolute -right-[18px] -bottom-4 grid size-[124px] -rotate-[13deg] place-content-center rounded-full border-2 border-accent bg-[rgba(241,237,227,0.35)] text-center text-accent opacity-[0.88] mix-blend-multiply"
+    >
+      <div className="absolute inset-[5px] rounded-full border border-accent opacity-85" />
+      <div className="font-mono text-[11px] leading-[1.7] font-semibold tracking-[0.14em]">
+        STDOUT
+      </div>
+      <div className="font-mono text-[9.5px] leading-[1.7] tracking-[0.1em]">AHMEDABAD</div>
+      <div className="font-mono text-[9.5px] leading-[1.7] tracking-[0.14em]">INDIA</div>
+    </div>
+  );
+}
