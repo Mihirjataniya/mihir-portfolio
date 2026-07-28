@@ -14,19 +14,19 @@ export default function Home() {
     <>
       <SiteHeader />
 
-      <div className="relative z-2 px-[clamp(18px,2.4vw,34px)] pt-[26px] pb-[30px]">
-        <div className="mx-auto max-w-[1360px]">
+      <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
+        <div className="mx-auto max-w-[1444px]">
           <Masthead />
 
           {/* Main body: broadsheet column + sidebar */}
-          <div className="grid grid-cols-1 p1080:grid-cols-[minmax(0,1fr)_clamp(268px,26.5%,352px)]">
-            <main className="min-w-0 pt-[18px] p1080:pr-7">
+          <div className="grid grid-cols-1 p1080:grid-cols-[minmax(0,1fr)_clamp(calc(268px*var(--ts)),26.5%,calc(352px*var(--ts)))]">
+            <main className="min-w-0 pt-[18px] p1080:pr-[28px]">
               <FromTheDesk />
               <Experience />
               <Projects />
             </main>
 
-            <aside className="mt-6 min-w-0 border-t border-rule-60 pt-5 p1080:mt-0 p1080:border-t-0 p1080:border-l p1080:pt-[18px] p1080:pl-7">
+            <aside className="mt-[24px] min-w-0 border-t border-rule-60 pt-[20px] p1080:mt-0 p1080:border-t-0 p1080:border-l p1080:pt-[18px] p1080:pl-[28px]">
               <ThisIssue />
               <TechStack />
               <FieldNotes />
@@ -36,7 +36,7 @@ export default function Home() {
           <EducationBar />
           <QuadRow />
 
-          <footer className="mt-4 border-t border-ink pt-[10px] text-center font-mono text-[11.5px] tracking-[0.02em] text-ink-mute">
+          <footer className="mt-[16px] border-t border-ink pt-[10px] text-center font-mono text-[calc(11.5px*var(--ts))] tracking-[0.02em] text-ink-mute">
             &copy; 2025 Mihir Jataniya. All thoughts are my own.
           </footer>
         </div>

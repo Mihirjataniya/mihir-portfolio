@@ -36,24 +36,25 @@ Accent alternates that shipped with the design: `#1f4e6b`, `#2e5b3c`, `#6b4a16`.
 
 ## Paper stock
 
-Four fixed layers on `html`/`body`, all `mix-blend-mode: multiply`: fibre (440px
-tile, opacity `.26`), flecks (560px, `.5`), mottle (900px, `.3`) and a radial
-vignette. Every tile is warm-black ink on transparency, so layer opacity maps
-directly to how much the paper darkens — that is the dial for more/less texture.
+Four fixed layers over `#f1ede3`, from `public/textures/`:
 
-The base `#f6f2e9` on `html` sits a shade above the design's `#f1ede3` because the
-ink layers multiply it back down to roughly `#eae6dd`.
+| Layer           | Tile              | Blend      | Opacity | z |
+| --------------- | ----------------- | ---------- | ------- | - |
+| `html::before`  | fibre, 440px      | soft-light | `.52`   | 3 |
+| `html::after`   | flecks, 560px     | multiply   | `.30`   | 4 |
+| `body::before`  | mottle, 900px     | soft-light | `.30`   | 3 |
+| `body::after`   | radial vignette   | multiply   | `.50`   | 3 |
 
-`public/textures/paper-flecks.png` is the original tile from the design. Fibre and
-mottle exceeded the design API's 256 KiB per-file read limit and are generated
-instead — seamless value-noise fBm, deterministic seeds:
+Fibre and mottle are mid-grey emboss maps and must stay on `soft-light` —
+multiplying them throws away their highlights and flattens the weave into dirt.
+Only flecks and the vignette multiply. `--grain-on: 0` removes all four.
 
-```bash
-node scripts/generate-textures.mjs   # rewrites paper-fibre.png + paper-mottle.png
-```
+## A note on the CSS layers
 
-For coarser or finer paper, change the octave lattices and `peakAlpha` in that
-script; for simply more or less of it, change the layer opacities in `globals.css`.
+Base resets and the `.kicker` / `.frame` / `.press-btn` / `.field` component
+classes live inside `@layer base` and `@layer components`. This matters: unlayered
+CSS outranks every Tailwind layer, so `p { margin: 0 }` sitting outside a layer
+silently beats `mt-[18px]` on the same element. Keep new global CSS in a layer.
 
 ## Things to drop in
 

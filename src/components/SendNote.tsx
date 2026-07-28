@@ -65,7 +65,7 @@ export default function SendNote() {
         />
         <button
           type="submit"
-          className="min-w-[150px] cursor-pointer justify-self-start border border-ink bg-ink px-4 py-[9px] font-mono text-[11.5px] font-medium tracking-[0.14em] text-paper uppercase transition-colors hover:border-accent hover:bg-accent"
+          className="min-w-[150px] cursor-pointer justify-self-start border border-ink bg-ink px-[16px] py-[9px] font-mono text-[calc(11.5px*var(--ts))] font-medium tracking-[0.14em] text-paper uppercase transition-colors hover:border-accent hover:bg-accent"
         >
           Send
         </button>
@@ -74,13 +74,13 @@ export default function SendNote() {
       {sent ? (
         <div
           role="status"
-          className="mt-[9px] font-mono text-[11px] text-accent"
+          className="mt-[9px] font-mono text-[calc(11px*var(--ts))] text-accent"
         >
           Opening your mail client&hellip;
         </div>
       ) : null}
 
-      <div className="mt-[9px] font-mono text-[11px] text-ink-mute">
+      <div className="mt-[9px] font-mono text-[calc(11px*var(--ts))] text-ink-mute">
         No spam. No trackers. Just a person.
       </div>
     </>

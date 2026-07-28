@@ -56,7 +56,7 @@ const icons: Record<string, JSX.Element> = {
 
 export default function FieldNotes() {
   return (
-    <section id="notes" className="mt-5">
+    <section id="notes" className="mt-[20px]">
       <div className="kicker mb-[11px]">Field notes</div>
 
       <div className="frame grid gap-[11px] px-[15px] py-[14px]">
@@ -66,7 +66,7 @@ export default function FieldNotes() {
             className="grid grid-cols-[19px_minmax(0,1fr)] items-start gap-[10px]"
           >
             {icons[note.icon]}
-            <div className="font-mono text-[11.8px] leading-[1.5] text-ink-3">
+            <div className="font-mono text-[calc(11.8px*var(--ts))] leading-[1.5] text-ink-3">
               <strong className="font-semibold text-ink">{note.label}</strong> {note.text}
             </div>
           </div>

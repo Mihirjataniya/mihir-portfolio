@@ -3,22 +3,22 @@ import { projects, type Project } from "@/data/issue";
 
 export default function Projects() {
   return (
-    <section id="print" className="mt-[22px] border-t border-rule-60 pt-3">
+    <section id="print" className="mt-[22px] border-t border-rule-60 pt-[12px]">
       <div className="kicker">Currently in print</div>
 
-      <div className="mt-[11px] grid grid-cols-[repeat(auto-fit,minmax(248px,1fr))] border border-rule-55">
+      <div className="mt-[11px] grid grid-cols-[repeat(auto-fit,minmax(calc(248px*var(--ts)),1fr))] border border-rule-55">
         {projects.map((project, i) => (
           <ProjectCard key={project.no} project={project} first={i === 0} />
         ))}
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-        <span className="font-mono text-[11.5px] text-ink-mute italic">
+      <div className="mt-[12px] flex flex-wrap items-center justify-between gap-[12px]">
+        <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute italic">
           More in the archive &mdash; back issues, experiments, dead ends.
         </span>
         <a
           href="#print"
-          className="press-btn px-[17px] py-[9px] text-[11.5px] tracking-[0.11em]"
+          className="press-btn px-[17px] py-[9px] text-[calc(11.5px*var(--ts))] tracking-[0.11em]"
         >
           <span>See all projects</span>
           <span>&rarr;</span>
@@ -34,11 +34,11 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
       className={`min-w-0 px-[15px] pt-[14px] pb-[15px] ${first ? "" : "border-rule-55 p600:border-l"}`}
     >
       <div className="flex items-baseline gap-[9px]">
-        <span className="font-mono text-[11.5px] text-ink-mute">{project.no}</span>
-        <h4 className="font-display text-[17px] font-semibold text-ink">{project.title}</h4>
+        <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute">{project.no}</span>
+        <h4 className="font-display text-[calc(17px*var(--ts))] font-semibold text-ink">{project.title}</h4>
       </div>
 
-      <div className="mt-[11px] grid grid-cols-1 gap-3 p600:grid-cols-[minmax(96px,0.85fr)_minmax(0,1.6fr)]">
+      <div className="mt-[11px] grid grid-cols-1 gap-[12px] p600:grid-cols-[minmax(96px,0.85fr)_minmax(0,1.6fr)]">
         <div className="relative aspect-[16/10] overflow-hidden border border-rule-35 p600:aspect-[3/3.5]">
           <ImageSlot
             src={project.imageSrc}
@@ -48,7 +48,7 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
           <div className="halftone opacity-[0.26] [background-image:radial-gradient(circle_at_1px_1px,rgba(20,18,15,.85)_0.7px,transparent_1.1px)]" />
         </div>
 
-        <div className="grid min-w-0 gap-[9px] font-mono text-[11px] leading-[1.55] text-ink-3">
+        <div className="grid min-w-0 gap-[9px] font-mono text-[calc(11px*var(--ts))] leading-[1.55] text-ink-3">
           <p>{project.summary}</p>
           <p>
             <strong className="font-semibold text-ink">One decision:</strong> {project.decision}
@@ -59,7 +59,7 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
         </div>
       </div>
 
-      <div className="mt-3 flex items-center gap-[9px] font-mono text-[11.5px]">
+      <div className="mt-[12px] flex items-center gap-[9px] font-mono text-[calc(11.5px*var(--ts))]">
         <a href={project.live} className="link-underline">
           live
         </a>
@@ -69,7 +69,7 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
         </a>
       </div>
 
-      <div className="mt-[9px] flex flex-wrap gap-1">
+      <div className="mt-[9px] flex flex-wrap gap-[4px]">
         {project.tags.map((tag) => (
           <span key={tag} className="tag">
             {tag}

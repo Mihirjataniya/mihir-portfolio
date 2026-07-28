@@ -26,11 +26,11 @@ export default function ImageSlot({
   if (!src) {
     return (
       <div
-        className={`absolute inset-0 grid place-content-center bg-[rgba(20,18,15,0.045)] px-3 text-center ${className}`}
+        className={`absolute inset-0 grid place-content-center bg-[rgba(20,18,15,0.045)] px-[12px] text-center ${className}`}
         role="img"
         aria-label={placeholder}
       >
-        <span className="font-mono text-[10px] tracking-[0.12em] text-ink-faint uppercase">
+        <span className="font-mono text-[calc(10px*var(--ts))] tracking-[0.12em] text-ink-faint uppercase">
           {placeholder}
         </span>
       </div>

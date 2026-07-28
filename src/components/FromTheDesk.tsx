@@ -7,13 +7,13 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
     <section id="desk">
       <div className="kicker mb-[11px]">From the desk</div>
 
-      <div className="frame grid grid-cols-1 gap-[clamp(18px,2.4vw,30px)] px-[clamp(16px,2vw,26px)] pt-[clamp(16px,1.9vw,24px)] pb-[clamp(16px,1.7vw,22px)] p600:grid-cols-[minmax(0,1fr)_clamp(208px,31%,336px)]">
+      <div className="frame grid grid-cols-1 gap-[clamp(18px,2.4vw,30px)] px-[clamp(16px,2vw,26px)] pt-[clamp(16px,1.9vw,24px)] pb-[clamp(16px,1.7vw,22px)] p600:grid-cols-[minmax(0,1fr)_clamp(calc(208px*var(--ts)),31%,calc(336px*var(--ts)))]">
         <div className="min-w-0">
-          <h2 className="font-display text-[clamp(26px,3.05vw,40px)] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
+          <h2 className="font-display text-[calc(clamp(26px,3.05vw,40px)*var(--ts))] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
             I keep choosing the harder infrastructure.
           </h2>
 
-          <p className="mt-[18px] font-mono text-[13px] leading-[1.78] text-ink-3 italic">
+          <p className="mt-[18px] font-mono text-[calc(13px*var(--ts))] leading-[1.78] text-ink-3 italic">
             It&apos;s slower. Messier. Usually invisible.
             <br />
             But it compounds. Interfaces can be rebuilt.
@@ -21,25 +21,25 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
             Plumbing, once ignored, leaks everywhere.
           </p>
 
-          <p className="mt-[17px] font-mono text-[12.5px] leading-[1.7] text-ink-3">
+          <p className="mt-[17px] font-mono text-[calc(12.5px*var(--ts))] leading-[1.7] text-ink-3">
             Right now I care more about systems that don&apos;t break under load, async work that
             survives failure, and APIs that don&apos;t become regrets.
           </p>
 
-          <p className="mt-[14px] font-mono text-[12.5px] leading-[1.7] text-ink-3">
+          <p className="mt-[14px] font-mono text-[calc(12.5px*var(--ts))] leading-[1.7] text-ink-3">
             Maybe it&apos;s irrational. Maybe it&apos;s just stubborn.
           </p>
 
-          <div className="mt-[22px] grid gap-[3px] font-display text-[14.5px] text-ink-2 italic">
+          <div className="mt-[22px] grid gap-[3px] font-display text-[calc(14.5px*var(--ts))] text-ink-2 italic">
             <div>&mdash; {masthead.author}</div>
             <div>{masthead.city}</div>
             <div>{masthead.date}</div>
           </div>
 
-          <div className="mt-5 flex justify-center">
+          <div className="mt-[20px] flex justify-center">
             <a
               href={masthead.resumeHref}
-              className="press-btn gap-[10px] px-[18px] py-[10px] text-[12px] tracking-[0.09em]"
+              className="press-btn gap-[10px] px-[18px] py-[10px] text-[calc(12px*var(--ts))] tracking-[0.09em]"
             >
               <svg
                 viewBox="0 0 24 24"
@@ -62,7 +62,10 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
           </div>
         </div>
 
-        <div className="relative mx-auto w-full min-w-0 max-w-[320px] p600:mx-0 p600:max-w-none">
+        {/* self-start matters: as a stretched grid item this box would inherit the
+            full height of the text column, and the stamp — anchored to its bottom —
+            would drift far below the photograph instead of overlapping its corner. */}
+        <div className="relative mx-auto w-full min-w-0 max-w-[320px] self-start p600:mx-0 p600:max-w-none">
           <div className="border border-dashed border-[rgba(20,18,15,0.55)] bg-[rgba(20,18,15,0.03)] p-[6px]">
             <div className="relative aspect-[4/4.6] overflow-hidden">
               <ImageSlot placeholder="Portrait photo" alt="Portrait of Mihir Jataniya" priority />
@@ -82,14 +85,14 @@ function Stamp() {
   return (
     <div
       aria-hidden="true"
-      className="absolute -right-[18px] -bottom-4 grid size-[124px] -rotate-[13deg] place-content-center rounded-full border-2 border-accent bg-[rgba(241,237,227,0.35)] text-center text-accent opacity-[0.88] mix-blend-multiply"
+      className="absolute -right-[18px] -bottom-[16px] grid size-[124px] -rotate-[13deg] place-content-center rounded-full border-2 border-accent bg-[rgba(241,237,227,0.35)] text-center text-accent opacity-[0.88] mix-blend-multiply"
     >
       <div className="absolute inset-[5px] rounded-full border border-accent opacity-85" />
-      <div className="font-mono text-[11px] leading-[1.7] font-semibold tracking-[0.14em]">
+      <div className="font-mono text-[calc(11px*var(--ts))] leading-[1.7] font-semibold tracking-[0.14em]">
         STDOUT
       </div>
-      <div className="font-mono text-[9.5px] leading-[1.7] tracking-[0.1em]">AHMEDABAD</div>
-      <div className="font-mono text-[9.5px] leading-[1.7] tracking-[0.14em]">INDIA</div>
+      <div className="font-mono text-[calc(9.5px*var(--ts))] leading-[1.7] tracking-[0.1em]">AHMEDABAD</div>
+      <div className="font-mono text-[calc(9.5px*var(--ts))] leading-[1.7] tracking-[0.14em]">INDIA</div>
     </div>
   );
 }
