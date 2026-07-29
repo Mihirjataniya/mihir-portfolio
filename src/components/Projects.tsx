@@ -51,10 +51,11 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
         <div className="grid min-w-0 gap-[9px] font-mono text-[calc(11px*var(--ts))] leading-[1.55] text-ink-3">
           <p>{project.summary}</p>
           <p>
-            <strong className="font-semibold text-ink">One decision:</strong> {project.decision}
+            <strong className="font-semibold text-ink">Technical Decision:</strong> {project.decision}
           </p>
           <p>
-            <strong className="font-semibold text-ink">Trouble:</strong> {project.trouble}
+            <strong className="font-semibold text-ink">Implementation:</strong>{" "}
+            {project.implementation}
           </p>
         </div>
       </div>

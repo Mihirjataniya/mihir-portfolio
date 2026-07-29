@@ -33,7 +33,7 @@ export const contents = [
   { no: "01", title: "From the Desk", href: "#desk", blurb: "Why I build the plumbing." },
   {
     no: "02",
-    title: "Experience at GlitchOver",
+    title: "Experience",
     href: "#experience",
     blurb: "What I shipped and learned.",
   },
@@ -68,7 +68,7 @@ export type Project = {
   imageAlt: string;
   summary: string;
   decision: string;
-  trouble: string;
+  implementation: string;
   live: string;
   source: string;
   tags: string[];
@@ -81,9 +81,10 @@ export const projects: Project[] = [
     imageId: "stdout-proj-1",
     imageAlt: "MeetNote screenshot",
     summary:
-      "Video conferencing with an AI notes pipeline. Built on MediaSoup SFU. Async recording → transcription → notes via SQS. LLM fallback chain when providers fail.",
-    decision: "MediaSoup SFU over mesh—came late, but was the right call.",
-    trouble: "Transcription used to block the call. Decoupled with SQS. Never going back.",
+      "A MediaSoup SFU-powered video conferencing platform featuring an event-driven AI processing pipeline for meeting recordings converted into structured PDFs.",
+    decision: "SFU architecture chosen for efficient media routing and horizontal scalability.",
+    implementation:
+      "Recording, transcription, and summarization run independently through distributed workers.",
     live: "#print",
     source: "#print",
     tags: ["MediaSoup", "SQS", "WebRTC", "AWS", "AI", "TypeScript"],
@@ -94,9 +95,10 @@ export const projects: Project[] = [
     imageId: "stdout-proj-2",
     imageAlt: "HelioKit screenshot",
     summary:
-      "Open-source React component library with motion. CLI that detects your project and drops components in.",
-    decision: "Build a CLI instead of copy-paste docs. Saved my future self hours.",
-    trouble: "Supporting every setup edge case. Tsup + tests helped.",
+      "An open-source React component library, motion-driven UI components with CLI that automatically detects project frameworks, and installs components directly into existing codebases.",
+    decision: "A CLI-first workflow prioritizes code ownership over package abstraction.",
+    implementation:
+      "Framework-aware installation resolves dependencies and generates ready-to-use components.",
     live: "#print",
     source: "#print",
     tags: ["React", "Framer Motion", "CLI", "npm", "TypeScript"],
@@ -122,13 +124,25 @@ export const fieldNotes = [
   {
     icon: "book",
     label: "Reading:",
-    text: "Designing Data-Intensive Applications. Again. Still relevant.",
+    text: "Anything that explores distributed systems, system design, or how software scales.",
   },
-  { icon: "screen", label: "Watching:", text: "Severance (again). The hallway is cinema." },
-  { icon: "code", label: "Learning:", text: "MediaSoup internals. Simulcast, SVC, and pain." },
-  { icon: "headphones", label: "Listening:", text: "Tycho, Bonobo, Nujabes. On repeat." },
-  { icon: "pen", label: "Building:", text: "HelioKit CLI. Small tool, surprisingly useful." },
-  { icon: "mug", label: "Note to self:", text: "Ship the 70% version. Perfect is a delay." },
+  { icon: "screen", label: "Last Watch:", text: "The Odyssey. Still thinking about it." },
+  {
+    icon: "code",
+    label: "Learning:",
+    text: "AI. Evals, Models, agents, RAG, Attention Mechanisms, and everything in between.",
+  },
+  {
+    icon: "headphones",
+    label: "Listening:",
+    text: "DHH",
+  },
+  {
+    icon: "mug",
+    label: "Away from the Keyboard:",
+    text: "Gym sessions, trying new recipes, or simply sitting for hours doing nothing.",
+  },
+  { icon: "pen", label: "Note to self:", text: "Ship the 70% version. Perfect is a delay." },
 ] as const;
 
 export const education = {
@@ -150,12 +164,15 @@ export const quickLinks = [
 
 export const classifieds = [
   {
-    head: "FOR SALE:",
-    body: "one abandoned side project, half-migrated to Postgres. Runs if you don't look at it.",
+    head: "FOR HIRE:",
+    body: "thoughtful engineering, ambitious products, and impossible deadlines.",
   },
-  { head: "WANTED:", body: "problems worth solving. Boring is fine." },
-  { head: "FREE:", body: "opinions, mostly unhelpful." },
-  { head: "TRADE:", body: "your weekend for my deployment scripts." },
+  { head: "SEEKING:", body: "curious people building things that matter." },
+  {
+    head: "CURRENTLY:",
+    body: "experimenting with distributed systems, AI, and developer tools.",
+  },
+  { head: "ALWAYS:", body: "learning, shipping, and improving." },
 ] as const;
 
 export const contact = {
@@ -165,6 +182,7 @@ export const contact = {
     label: "linkedin.com/in/mihir-jataniya",
     href: "https://linkedin.com/in/mihir-jataniya",
   },
+  x : { label: "@devwithdelulu", href: "https://x.com/devwithdelulu" },
 } as const;
 
 export const colophon = [

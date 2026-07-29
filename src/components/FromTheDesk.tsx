@@ -29,33 +29,27 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
       <div className="frame grid grid-cols-1 gap-[clamp(18px,2.4vw,30px)] px-[clamp(16px,2vw,26px)] pt-[clamp(16px,1.9vw,24px)] pb-[clamp(16px,1.7vw,22px)] p600:grid-cols-[minmax(0,1fr)_clamp(calc(208px*var(--ts)),31%,calc(336px*var(--ts)))]">
         <div className="min-w-0">
           <h2 className="font-display text-[calc(clamp(26px,3.05vw,40px)*var(--ts))] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
-            I keep choosing the harder infrastructure.
+            The more i learn,<br />  The more i want to Explore
           </h2>
 
           <p className="mt-[18px] font-mono text-[calc(13px*var(--ts))] leading-[1.78] text-ink-3 italic">
-            It&apos;s slower. Messier. Usually invisible.
+            I've come to believe that curiosity is less about finding answers and more about staying open to change.
             <br />
-            But it compounds. Interfaces can be rebuilt.
-            <br />
-            Plumbing, once ignored, leaks everywhere.
           </p>
 
           <p className="mt-[17px] font-mono text-[calc(12.5px*var(--ts))] leading-[1.7] text-ink-3">
-            Right now I care more about systems that don&apos;t break under load, async work that
-            survives failure, and APIs that don&apos;t become regrets.
+           It has led me toward technology, but also toward design, stories, photography, late-night ideas, and countless conversations that reshaped the way I think. I don't want to be defined by a single skill or profession
           </p>
 
           <p className="mt-[14px] font-mono text-[calc(12.5px*var(--ts))] leading-[1.7] text-ink-3">
-            Maybe it&apos;s irrational. Maybe it&apos;s just stubborn.
+            I'd rather be remembered as someone who remained genuinely interested in the world and never stopped exploring it.
           </p>
 
-          <div className="mt-[22px] grid gap-[3px] font-display text-[calc(14.5px*var(--ts))] text-ink-2 italic">
+          {/* <div className="mt-[22px] grid gap-[3px] font-display text-[calc(14.5px*var(--ts))] text-ink-2 italic">
             <div>&mdash; {masthead.author}</div>
-            <div>{masthead.city}</div>
-            <div>{masthead.date}</div>
-          </div>
+          </div> */}
 
-          <div className="mt-[20px] flex justify-center">
+          <div className="mt-[20px] flex justify-start">
             <a
               href={masthead.resumeHref}
               className="press-btn gap-[10px] px-[18px] py-[10px] text-[calc(12px*var(--ts))] tracking-[0.09em]"

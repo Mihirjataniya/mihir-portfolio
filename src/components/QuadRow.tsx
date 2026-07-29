@@ -32,7 +32,7 @@ export default function QuadRow() {
       <section id="letters" className={`min-w-0 px-[18px] pt-[14px] pb-[16px] ${cells[1]}`}>
         <div className="kicker kicker-sm">Letters</div>
         <div className="mt-[11px] font-mono text-[calc(11.5px*var(--ts))] leading-[1.55] text-ink-3">
-          I read email. I reply sometimes.
+          Feel free to reach out
         </div>
         <div className="dash-rule my-[11px]" />
         <div className="grid gap-[7px] font-mono text-[calc(11.5px*var(--ts))] leading-[1.5] text-ink-3">
@@ -51,9 +51,15 @@ export default function QuadRow() {
               {contact.linkedin.label}
             </a>
           </div>
+          <div>
+            X:{" "}
+            <a href={contact.x.href} target="_blank" rel="noreferrer">
+              {contact.x.label}
+            </a>
+          </div>
         </div>
         <p className="mt-[14px] inline-block border-b border-rule-35 pb-[2px] font-display text-[calc(14px*var(--ts))] leading-[1.45] text-ink-2 italic">
-          Write if you have something real to say.
+          Always open to thoughtful conversations.
         </p>
       </section>
 

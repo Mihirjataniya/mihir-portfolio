@@ -43,7 +43,7 @@ export default function Home() {
           <QuadRow />
 
           <footer className="mt-[16px] border-t border-ink pt-[10px] text-center font-mono text-[calc(11.5px*var(--ts))] tracking-[0.02em] text-ink-mute">
-            &copy; 2025 Mihir Jataniya. All thoughts are my own.
+            &copy; 2026 Mihir Jataniya. All thoughts are my own.
           </footer>
         </div>
       </div>
