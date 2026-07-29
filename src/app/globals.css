@@ -46,7 +46,10 @@
        is multiplied by this, so it is the single dial for overall text size.
        Spacing and rules stay fixed, keeping the layout's rhythm intact. */
     --ts: 1.111;
-    --np: var(--font-unifraktur), var(--font-playfair), serif;
+    --np: var(--font-grenze), var(--font-playfair), serif;
+    /* Nameplate weight — Grenze Gotisch is variable (100–900), so this is the
+       one knob for how heavy the blackletter prints. */
+    --np-weight: 500;
 
     --paper-fibre: url("/textures/paper-fibre.png");
     --paper-flecks: url("/textures/paper-flecks.png");
@@ -186,7 +189,7 @@
 @layer components {
   .nameplate {
     font-family: var(--np);
-    font-weight: 400;
+    font-weight: var(--np-weight);
   }
 
   .kicker {

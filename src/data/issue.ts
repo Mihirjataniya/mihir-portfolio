@@ -14,6 +14,12 @@ export const masthead = {
   resumeHref: "/resume.pdf",
 } as const;
 
+/** Right-hand side of the byline strip under the nameplate. */
+export const mastheadLinks = [
+  { label: "Projects", href: "#print" },
+  { label: "Blogs", href: "#notes" },
+] as const;
+
 export const nav = [
   { label: "Desk", href: "#desk" },
   { label: "Experience", href: "#experience" },

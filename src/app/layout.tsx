@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, Playfair_Display, UnifrakturMaguntia } from "next/font/google";
+import { Grenze_Gotisch, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 
 const playfair = Playfair_Display({
@@ -18,10 +18,10 @@ const plexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-const unifraktur = UnifrakturMaguntia({
+// Variable font (wght 100–900), so no `weight` — the nameplate dials it in CSS.
+const grenzeGotisch = Grenze_Gotisch({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-unifraktur",
+  variable: "--font-grenze",
   display: "swap",
 });
 
@@ -45,7 +45,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${plexMono.variable} ${unifraktur.variable} antialiased`}
+      className={`${playfair.variable} ${plexMono.variable} ${grenzeGotisch.variable} antialiased`}
     >
       <body>{children}</body>
     </html>

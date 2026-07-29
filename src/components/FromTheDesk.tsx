@@ -1,11 +1,30 @@
+import { Fragment } from "react";
 import ImageSlot from "@/components/ImageSlot";
-import { masthead } from "@/data/issue";
+import { masthead, mastheadLinks } from "@/data/issue";
 
 /** Lead editorial: the opinion column plus the editor's portrait. */
 export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean }) {
   return (
     <section id="desk">
-      <div className="kicker mb-[11px]">From the desk</div>
+      {/* The masthead's section links are hidden on phones, so they ride the
+          first kicker instead — the only nav on a phone above the fold. */}
+      <div className="mb-[11px] flex items-center justify-between gap-[12px]">
+        <div className="kicker">From the desk</div>
+
+        <nav
+          aria-label="Sections"
+          className="flex items-center gap-[9px] font-mono text-[calc(11px*var(--ts))] font-semibold tracking-[0.11em] whitespace-nowrap text-ink-3 uppercase p600:hidden"
+        >
+          {mastheadLinks.map((link, i) => (
+            <Fragment key={link.href}>
+              {i > 0 && <span className="text-ink-faint">&bull;</span>}
+              <a href={link.href} className="link-underline hover:text-accent">
+                {link.label}
+              </a>
+            </Fragment>
+          ))}
+        </nav>
+      </div>
 
       <div className="frame grid grid-cols-1 gap-[clamp(18px,2.4vw,30px)] px-[clamp(16px,2vw,26px)] pt-[clamp(16px,1.9vw,24px)] pb-[clamp(16px,1.7vw,22px)] p600:grid-cols-[minmax(0,1fr)_clamp(calc(208px*var(--ts)),31%,calc(336px*var(--ts)))]">
         <div className="min-w-0">

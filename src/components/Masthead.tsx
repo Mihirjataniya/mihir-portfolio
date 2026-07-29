@@ -1,4 +1,5 @@
-import { masthead } from "@/data/issue";
+import { Fragment } from "react";
+import { masthead, mastheadLinks } from "@/data/issue";
 
 /** The nameplate, hairline rules and the byline strip beneath it. */
 export default function Masthead() {
@@ -7,13 +8,18 @@ export default function Masthead() {
       <div className="border-t-4 border-ink" />
       <div className="mt-[3px] border-t border-ink" />
 
-      <h1 className="nameplate mt-[16px] text-center text-[calc(clamp(64px,14.2vw,186px)*var(--ts))] leading-[0.92] tracking-[0.015em] text-ink">
+      <h1 className="nameplate mt-[16px] text-center text-[calc(clamp(78px,15.5vw,186px)*var(--ts))] leading-[0.92] tracking-[0.015em] text-ink">
         {masthead.name}
       </h1>
 
-      <div className="mt-[14px] grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-[18px]">
+      {/* Tagline sits between two double rules. On phones it has to stay on one
+          line or the rules get squeezed to nothing, hence the smaller type,
+          tighter tracking and nowrap below p600. */}
+      <div className="mt-[14px] grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-[12px] p600:gap-[18px]">
         <DoubleRule />
-        <div className="font-mono text-[calc(15px*var(--ts))] tracking-[0.03em] text-ink-2">{masthead.tagline}</div>
+        <div className="font-mono text-[calc(10.5px*var(--ts))] tracking-[0.02em] whitespace-nowrap text-ink-2 p600:text-[calc(15px*var(--ts))] p600:tracking-[0.03em]">
+          {masthead.tagline}
+        </div>
         <DoubleRule />
       </div>
 
@@ -22,15 +28,19 @@ export default function Masthead() {
           Published by{" "}
           <span className="font-semibold text-accent">{masthead.author}</span>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-[11px] whitespace-nowrap">
-          <span>{masthead.date}</span>
-          <Dot />
-          <span>{masthead.city}</span>
-          <Dot />
-          <span>{masthead.issue}</span>
-          <Dot />
-          <span>{masthead.cadence}</span>
-        </div>
+        <nav
+          aria-label="Masthead links"
+          className="hidden flex-wrap items-center justify-center gap-[11px] whitespace-nowrap p600:flex p600:justify-end"
+        >
+          {mastheadLinks.map((link, i) => (
+            <Fragment key={link.href}>
+              {i > 0 && <Dot />}
+              <a href={link.href} className="link-underline font-semibold hover:text-accent">
+                {link.label}
+              </a>
+            </Fragment>
+          ))}
+        </nav>
       </div>
     </header>
   );

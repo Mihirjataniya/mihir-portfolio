@@ -1,9 +1,12 @@
 import { contents } from "@/data/issue";
 
-/** Table of contents, set as a boxed sidebar column. */
+/**
+ * Table of contents, set as a boxed sidebar column.
+ * Hidden on phones — the reader just scrolls the issue there.
+ */
 export default function ThisIssue() {
   return (
-    <nav aria-label="Contents of this issue">
+    <nav aria-label="Contents of this issue" className="hidden p600:block">
       <div className="kicker mb-[11px]">This issue</div>
 
       <div className="frame px-[15px] pt-[6px] pb-[8px]">
