@@ -29,8 +29,15 @@ export default function EducationBar() {
             ))}
           </div>
 
-          <div className="relative aspect-[5/2.6] max-w-[280px] opacity-90 mix-blend-multiply p860:max-w-none">
-            <ImageSlot placeholder="Newspaper engraving" alt="Newspaper engraving" fit="contain" />
+          {/* aspect matches the engraving's own 1616×973 so `contain` leaves no
+              dead band; multiply drops its transparent ground onto the paper. */}
+          <div className="relative aspect-[5/3] max-w-[280px] opacity-90 mix-blend-multiply p860:max-w-none">
+            <ImageSlot
+              src="/News-Paper.png"
+              placeholder="Newspaper engraving"
+              alt="Engraving of a stack of folded newspapers"
+              fit="contain"
+            />
           </div>
         </div>
       </div>

@@ -80,9 +80,15 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
             would drift far below the photograph instead of overlapping its corner. */}
         <div className="relative mx-auto w-full min-w-0 max-w-[320px] self-start p600:mx-0 p600:max-w-none">
           <div className="border border-dashed border-[rgba(20,18,15,0.55)] bg-[rgba(20,18,15,0.03)] p-[6px]">
+            {/* The portrait is already screened, so no .halftone overlay here —
+                two dot grids stacked would moiré. */}
             <div className="relative aspect-[4/4.6] overflow-hidden">
-              <ImageSlot placeholder="Portrait photo" alt="Portrait of Mihir Jataniya" priority />
-              <div className="halftone opacity-30" />
+              <ImageSlot
+                src="/Mihir-img.png"
+                placeholder="Portrait photo"
+                alt="Portrait of Mihir Jataniya"
+                priority
+              />
             </div>
           </div>
 
