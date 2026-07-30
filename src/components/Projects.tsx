@@ -28,6 +28,14 @@ export default function Projects() {
   );
 }
 
+function ExternalLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="link-underline">
+      {children}
+    </a>
+  );
+}
+
 function ProjectCard({ project, first }: { project: Project; first: boolean }) {
   return (
     <article
@@ -60,14 +68,16 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
         </div>
       </div>
 
-      <div className="mt-[12px] flex items-center gap-[9px] font-mono text-[calc(11.5px*var(--ts))]">
-        <a href={project.live} className="link-underline">
-          live
-        </a>
+      <div className="mt-[12px] flex flex-wrap items-center gap-[9px] font-mono text-[calc(11.5px*var(--ts))]">
+        <ExternalLink href={project.live}>live</ExternalLink>
         <span className="text-ink-faint">&#8599;</span>
-        <a href={project.source} className="link-underline">
-          source
-        </a>
+        <ExternalLink href={project.source}>source</ExternalLink>
+        {project.npm ? (
+          <>
+            <span className="text-ink-faint">&#8599;</span>
+            <ExternalLink href={project.npm}>npm</ExternalLink>
+          </>
+        ) : null}
       </div>
 
       <div className="mt-[9px] flex flex-wrap gap-[4px]">

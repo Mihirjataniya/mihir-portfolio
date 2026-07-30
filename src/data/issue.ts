@@ -71,6 +71,8 @@ export type Project = {
   implementation: string;
   live: string;
   source: string;
+  /** Only for projects that ship a package. */
+  npm?: string;
   tags: string[];
 };
 
@@ -85,8 +87,8 @@ export const projects: Project[] = [
     decision: "SFU architecture chosen for efficient media routing and horizontal scalability.",
     implementation:
       "Recording, transcription, and summarization run independently through distributed workers.",
-    live: "#print",
-    source: "#print",
+    live: "https://meet-note-ai.vercel.app/",
+    source: "https://github.com/Mihirjataniya/MeetNote-AI",
     tags: ["MediaSoup", "SQS", "WebRTC", "AWS", "AI", "TypeScript"],
   },
   {
@@ -99,8 +101,9 @@ export const projects: Project[] = [
     decision: "A CLI-first workflow prioritizes code ownership over package abstraction.",
     implementation:
       "Framework-aware installation resolves dependencies and generates ready-to-use components.",
-    live: "#print",
-    source: "#print",
+    live: "https://heliokit.vercel.app/",
+    source: "https://github.com/Mihirjataniya/Heliokit",
+    npm: "https://www.npmjs.com/package/heliokit",
     tags: ["React", "Framer Motion", "CLI", "npm", "TypeScript"],
   },
 ];
