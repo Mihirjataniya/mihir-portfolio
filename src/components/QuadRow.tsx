@@ -75,7 +75,11 @@ export default function QuadRow() {
           ))}
         </div>
         <div className="mt-[12px] flex items-center gap-[7px] font-mono text-[calc(11.5px*var(--ts))]">
-          <a href={masthead.resumeHref} className="link-underline text-accent">
+          <a
+            href={masthead.resumeHref}
+            download={masthead.resumeFile}
+            className="link-underline text-accent"
+          >
             Resume (PDF)
           </a>
           <span className="text-accent">&darr;</span>

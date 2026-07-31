@@ -12,6 +12,8 @@ export const masthead = {
   issue: "Issue No. 07",
   cadence: "Published irregularly",
   resumeHref: "/resume.pdf",
+  /** Filename the browser saves it as, not the path it is served from. */
+  resumeFile: "Mihir-Jataniya-Resume.pdf",
 } as const;
 
 /** Right-hand side of the byline strip under the nameplate. */
@@ -160,7 +162,7 @@ export const quickLinks = [
   { label: "MediaSoup Notes", href: "#print" },
   { label: "Why I stopped using X", href: "#print" },
   { label: "How MeetNote evolved", href: "#print" },
-  { label: "Resume (PDF)", href: "#colophon" },
+  { label: "Resume (PDF)", href: masthead.resumeHref },
   { label: "GitHub", href: "#letters" },
   { label: "LinkedIn", href: "#letters" },
 ] as const;

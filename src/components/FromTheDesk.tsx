@@ -52,6 +52,7 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
           <div className="mt-[20px] flex justify-start">
             <a
               href={masthead.resumeHref}
+              download={masthead.resumeFile}
               className="press-btn gap-[10px] px-[18px] py-[10px] text-[calc(12px*var(--ts))] tracking-[0.09em]"
             >
               <svg

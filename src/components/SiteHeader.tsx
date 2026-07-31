@@ -50,6 +50,7 @@ export default function SiteHeader() {
 
         <a
           href={masthead.resumeHref}
+          download={masthead.resumeFile}
           className="press-btn flex-none gap-[7px] px-[13px] py-[6px] text-[calc(10.5px*var(--ts))] tracking-[0.12em]"
         >
           <span>Resume</span>
