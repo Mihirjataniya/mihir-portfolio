@@ -1,7 +1,8 @@
 import ImageSlot from "@/components/ImageSlot";
-import { education, quickLinks } from "@/data/issue";
+import TechStack from "@/components/TechStack";
+import { education } from "@/data/issue";
 
-/** Full-width band: education on the left, quick links + engraving on the right. */
+/** Full-width band: education on the left, tech stack + engraving on the right. */
 export default function EducationBar() {
   return (
     <div className="mt-[24px] grid grid-cols-1 border border-rule-70 p860:grid-cols-[clamp(calc(228px*var(--ts)),25%,calc(320px*var(--ts)))_minmax(0,1fr)]">
@@ -17,17 +18,10 @@ export default function EducationBar() {
       </section>
 
       <div className="min-w-0 border-t border-rule-50 px-[20px] pt-[15px] pb-[17px] p860:border-t-0 p860:border-l">
-        <div className="kicker">Quick links</div>
+        <div className="kicker">Tech stack</div>
 
         <div className="mt-[12px] grid grid-cols-1 items-start gap-[clamp(14px,2vw,24px)] p860:grid-cols-[minmax(0,1fr)_clamp(calc(150px*var(--ts)),30%,calc(250px*var(--ts)))]">
-          <div className="grid gap-[6px] font-mono text-[calc(12px*var(--ts))] text-ink-3">
-            {quickLinks.map((link) => (
-              <div key={link.label} className="grid grid-cols-[16px_minmax(0,1fr)] gap-[6px]">
-                <span className="text-ink-faint">&rarr;</span>
-                <a href={link.href}>{link.label}</a>
-              </div>
-            ))}
-          </div>
+          <TechStack />
 
           {/* aspect matches the engraving's own 1616×973 so `contain` leaves no
               dead band; multiply drops its transparent ground onto the paper. */}

@@ -1,11 +1,10 @@
 import { stack } from "@/data/issue";
 
+/** Lives in the education band; the band supplies its own padding and kicker. */
 export default function TechStack() {
   return (
-    <section id="stack" className="mt-[20px]">
-      <div className="kicker mb-[11px]">Tech stack</div>
-
-      <dl className="frame grid gap-[11px] px-[15px] py-[14px]">
+    <section id="stack">
+      <dl className="grid gap-[11px]">
         {stack.map((row) => (
           <div
             key={row.label}

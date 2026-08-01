@@ -5,8 +5,9 @@ import FromTheDesk from "@/components/FromTheDesk";
 import Masthead from "@/components/Masthead";
 import Projects from "@/components/Projects";
 import QuadRow from "@/components/QuadRow";
+import QuickLinks from "@/components/QuickLinks";
 import SiteHeader from "@/components/SiteHeader";
-import TechStack from "@/components/TechStack";
+import Sudoku from "@/components/Sudoku";
 import ThisIssue from "@/components/ThisIssue";
 
 export default function Home() {
@@ -35,8 +36,9 @@ export default function Home() {
 
             <aside className="order-3 mt-[24px] min-w-0 border-t border-rule-60 pt-[20px] p1080:col-start-2 p1080:row-start-1 p1080:mt-0 p1080:border-t-0 p1080:border-l p1080:pt-[18px] p1080:pl-[28px]">
               <ThisIssue />
-              <TechStack />
               <FieldNotes />
+              <QuickLinks />
+              <Sudoku />
             </aside>
           </div>
 

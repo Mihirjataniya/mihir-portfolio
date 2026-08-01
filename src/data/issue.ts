@@ -54,11 +54,15 @@ export const experience = {
   location: "Ahmedabad, India",
   bullets: [
     "Built a scalable **payment** microservice with full ACID transaction guarantees (MongoDB transactions) handling core money-movement logic for a platform serving 5,000+ daily active users.",
+    "Secured the payment-gateway **webhook ingestion** pipeline across 3 providers with **HMAC-SHA256** timing-safe signature verification and idempotent order-status checks, eliminating replay attacks and duplicate wallet credits during gateway retry storms.",
     "Built a customer-support chatbot on a **RAG + LLM** pipeline with automatic escalation to human agents, deflecting 70% of routine queries while routing complex ones.",
-    "Engineered **real-time** systems over WebSockets for a gig-based platform, including live queue management and presence, keeping state synchronized across 1,000+ concurrent users with sub-second updates.",
-    "Cut API p95 latency by **40%** and database load via Redis caching for slow-changing data and by replacing raw MongoDB queries with aggregation pipelines; redesigned the slot-booking UI/UX, reducing booking-confusion failures by **90%**.",
-    "Built social-profile **scraping** and third-party integrations on a queue + message-broker architecture (AWS SQS) for reliable asynchronous processing at scale, plus internal creator tooling: a Discord event-reporting bot and OBS-integrated live streaming overlays surfacing real-time platform events.",
-    "Designed a role-based access control (RBAC) admin panel used across Finance, Partnerships, Marketing, Operations, and Engineering, enabling secure permission management and internal workflows.",
+    "Engineered **real-time** systems over WebSockets for a gig-based platform, including live queue management and presence, keeping state synchronized across **1,000+ concurrent** users with sub-second updates.",
+    "Cut API **p95** latency by **40%** and reduced database load by caching slow-changing data in Redis and replacing raw MongoDB queries with **aggregation pipelines**.",
+    "Redesigned the slot-booking **UI/UX** around a clearer availability and confirmation flow, reducing booking-confusion failures by **90%**.",
+    "Moved social-profile **scraping** and third-party integrations onto a **queue + message-broker architecture (AWS SQS)**, making high-volume asynchronous processing reliable and retryable.",
+    "Built a scalable **notification service** fanning out email, push, in-app, and Discord alerts from a single event contract, with templating, per-user preferences, idempotent delivery, and retry with dead-letter handling — sustaining **50,000+ notifications/day** at **99.9%** delivery.",
+    "Shipped internal creator **tooling** that surfaces real-time platform events: a **Discord event-reporting bot** and **OBS-integrated live streaming overlays.**",
+    "Designed a **role-based access control** (RBAC) admin panel used across Finance, Partnerships, Marketing, Operations, and Engineering, enabling secure permission management and internal workflows.",
   ],
 } as const;
 
@@ -120,9 +124,14 @@ export const stack = [
   { label: "Databases", value: "MongoDB, PostgreSQL, Redis, Vector Databases" },
   {
     label: "Infrastructure",
-    value: "Docker, AWS, Cloudflare, EC2, CI/CD, Storage Buckets, Logging & Monitoring",
+    value: "Docker, Amplify, Cloudflare, EC2, CI/CD, Storage Buckets, Logging & APMs, DNS Management",
   },
   { label: "AI", value: "RAG, LLM Integrations, Transformers, Tokenization, Prompt Design" },
+  {
+    label: "Architecture",
+    value:
+      "Microservices, RBAC, MVC, Event-Driven Architecture, Payment Infrastructure, Factory Pattern",
+  },
 ] as const;
 
 export const fieldNotes = [
@@ -166,6 +175,20 @@ export const quickLinks = [
   { label: "GitHub", href: "#letters" },
   { label: "LinkedIn", href: "#letters" },
 ] as const;
+
+/**
+ * The back-page sudoku. Both strings are 81 chars, read left-to-right and
+ * top-to-bottom; "." is a blank the reader fills in. Swap in a new pair each
+ * issue — the component derives everything else from these two lines.
+ */
+export const sudoku = {
+  no: "№ 07",
+  difficulty: "Moderate",
+  givens:
+    "53..7....6..195....98....6.8...6...34..8.3..17...2...6.6....28....419..5....8..79",
+  solution:
+    "534678912672195348198342567859761423426853791713924856961537284287419635345286179",
+} as const;
 
 export const classifieds = [
   {
