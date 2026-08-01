@@ -85,7 +85,7 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
                 two dot grids stacked would moiré. */}
             <div className="relative aspect-[4/4.6] overflow-hidden">
               <ImageSlot
-                src="/Mihir-img.png"
+                src="/Mihir-img.webp"
                 placeholder="Portrait photo"
                 alt="Portrait of Mihir Jataniya"
                 priority

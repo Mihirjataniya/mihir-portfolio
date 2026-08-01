@@ -9,6 +9,8 @@ type ImageSlotProps = {
   fit?: "cover" | "contain";
   className?: string;
   priority?: boolean;
+  /** Override when the slot is wider than a sidebar-sized thumbnail. */
+  sizes?: string;
 };
 
 /**
@@ -22,6 +24,7 @@ export default function ImageSlot({
   fit = "cover",
   className = "",
   priority = false,
+  sizes = "(max-width: 600px) 90vw, (max-width: 1080px) 45vw, 340px",
 }: ImageSlotProps) {
   if (!src) {
     return (
@@ -42,7 +45,7 @@ export default function ImageSlot({
       src={src}
       alt={alt}
       fill
-      sizes="(max-width: 600px) 90vw, (max-width: 1080px) 45vw, 340px"
+      sizes={sizes}
       priority={priority}
       className={`${fit === "contain" ? "object-contain" : "object-cover"} [filter:grayscale(1)_contrast(1.07)] ${className}`}
     />

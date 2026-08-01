@@ -87,7 +87,8 @@ export const projects: Project[] = [
     no: "01",
     title: "MeetNote AI",
     imageId: "stdout-proj-1",
-    imageAlt: "MeetNote screenshot",
+    imageSrc: "/projects/meetnote.webp",
+    imageAlt: "MeetNote AI landing page",
     summary:
       "A MediaSoup SFU-powered video conferencing platform featuring an event-driven AI processing pipeline for meeting recordings converted into structured PDFs.",
     decision: "SFU architecture chosen for efficient media routing and horizontal scalability.",
@@ -101,7 +102,8 @@ export const projects: Project[] = [
     no: "02",
     title: "HelioKit",
     imageId: "stdout-proj-2",
-    imageAlt: "HelioKit screenshot",
+    imageSrc: "/projects/heliokit.webp",
+    imageAlt: "HelioKit landing page",
     summary:
       "An open-source React component library, motion-driven UI components with CLI that automatically detects project frameworks, and installs components directly into existing codebases.",
     decision: "A CLI-first workflow prioritizes code ownership over package abstraction.",

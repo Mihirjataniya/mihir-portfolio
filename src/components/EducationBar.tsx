@@ -27,7 +27,7 @@ export default function EducationBar() {
               dead band; multiply drops its transparent ground onto the paper. */}
           <div className="relative aspect-[5/3] max-w-[280px] opacity-90 mix-blend-multiply p860:max-w-none">
             <ImageSlot
-              src="/News-Paper.png"
+              src="/News-Paper.webp"
               placeholder="Newspaper engraving"
               alt="Engraving of a stack of folded newspapers"
               fit="contain"

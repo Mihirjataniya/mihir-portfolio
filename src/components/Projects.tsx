@@ -46,12 +46,17 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
         <h4 className="font-display text-[calc(17px*var(--ts))] font-semibold text-ink">{project.title}</h4>
       </div>
 
-      <div className="mt-[11px] grid grid-cols-1 gap-[12px] p600:grid-cols-[minmax(96px,0.85fr)_minmax(0,1.6fr)]">
-        <div className="relative aspect-[16/10] overflow-hidden border border-rule-35 p600:aspect-[3/3.5]">
+      {/* The plate runs the full width of the card with the copy underneath —
+          a cropped-to-portrait thumbnail threw away most of the frame. The
+          aspect matches the screenshots' own 1917x865 so `cover` has nothing
+          left to trim; reshoot at that ratio or this starts cropping again. */}
+      <div className="mt-[11px] grid grid-cols-1 gap-[12px]">
+        <div className="relative aspect-[1917/865] overflow-hidden border border-rule-35">
           <ImageSlot
             src={project.imageSrc}
             alt={project.imageAlt}
             placeholder={project.imageAlt}
+            sizes="(max-width: 600px) 92vw, (max-width: 1080px) 46vw, 500px"
           />
           <div className="halftone opacity-[0.26] [background-image:radial-gradient(circle_at_1px_1px,rgba(20,18,15,.85)_0.7px,transparent_1.1px)]" />
         </div>
