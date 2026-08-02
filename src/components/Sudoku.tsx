@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { sudoku } from "@/data/issue";
 
 const GIVENS = sudoku.givens.split("").map((c) => (c === "." ? 0 : Number(c)));
@@ -36,6 +36,7 @@ const PEERS = Array.from({ length: 81 }, (_, i) => peers(i));
 export default function Sudoku() {
   const [values, setValues] = useState<number[]>(GIVENS);
   const [selected, setSelected] = useState<number | null>(null);
+  const cells = useRef<(HTMLButtonElement | null)[]>([]);
 
   /** Filled cells that clash with a peer holding the same digit. */
   const conflicts = useMemo(() => {
@@ -62,7 +63,12 @@ export default function Sudoku() {
   const move = (i: number, dRow: number, dCol: number) => {
     const row = Math.min(8, Math.max(0, Math.floor(i / 9) + dRow));
     const col = Math.min(8, Math.max(0, (i % 9) + dCol));
-    setSelected(row * 9 + col);
+    const next = row * 9 + col;
+    setSelected(next);
+    // The roving tabindex below only decides which cell is *tabbable*. DOM
+    // focus has to be dragged along by hand, otherwise the cell we just left
+    // keeps receiving keystrokes and the next digit lands in the wrong square.
+    cells.current[next]?.focus();
   };
 
   const onKeyDown = (e: React.KeyboardEvent, i: number) => {
@@ -118,6 +124,9 @@ export default function Sudoku() {
             return (
               <button
                 key={i}
+                ref={(el) => {
+                  cells.current[i] = el;
+                }}
                 type="button"
                 role="gridcell"
                 aria-label={`Row ${Math.floor(i / 9) + 1}, column ${(i % 9) + 1}${
