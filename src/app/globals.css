@@ -65,9 +65,15 @@
     margin: 0;
     padding: 0;
     background: #f1ede3;
+    /* The paper layers are sized off these boxes, so a short page still has
+       to be a full sheet — otherwise the grain stops where the copy does. */
+    min-height: 100vh;
   }
 
   html {
+    /* Containing block for the paper layers below, so they span the whole
+       document instead of the viewport. */
+    position: relative;
     scroll-behavior: smooth;
     /* Hide the scrollbar without disabling scrolling — keyboard, wheel and
        touch all still work, the gutter just isn't painted. */
@@ -83,6 +89,7 @@
   }
 
   body {
+    position: relative;
     color: #14120f;
     text-wrap: pretty;
     -webkit-font-smoothing: antialiased;
@@ -94,13 +101,18 @@
      Fibre and mottle are mid-grey emboss maps — they must stay on
      soft-light; multiply discards their highlights and the weave
      collapses into dirt. Only flecks and the vignette multiply.
+
+     The three paper layers are absolute, not fixed: they have to travel
+     with the document so a given fleck stays welded to the words it sits
+     on. Pinned to the viewport they read as a screen the type slides
+     behind, which is the opposite of ink soaking into a sheet.
   ---------------------------------------------------------------- */
   html::before,
   html::after,
   body::before,
   body::after {
     content: "";
-    position: fixed;
+    position: absolute;
     inset: 0;
     pointer-events: none;
   }
@@ -126,7 +138,11 @@
     background: var(--paper-mottle) repeat 0 0 / 900px 900px;
   }
 
+  /* The vignette is lighting on the sheet, not part of it — it stays welded
+     to the viewport so the page darkens at the edges of the screen rather
+     than once, somewhere in the middle of a very long document. */
   body::after {
+    position: fixed;
     z-index: 3;
     opacity: calc(0.5 * var(--grain-on));
     mix-blend-mode: multiply;
