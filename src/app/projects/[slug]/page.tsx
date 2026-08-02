@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageSlot from "@/components/ImageSlot";
-import SiteHeader from "@/components/SiteHeader";
 import { masthead } from "@/data/issue";
 import {
   getProject,
@@ -31,7 +30,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   if (!project) return {};
 
-  const title = `${project.title} — STDOUT`;
+  const title = `${project.title} · STDOUT`;
 
   return {
     title,
@@ -54,61 +53,56 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   const { previous, next } = projectNeighbours(project.slug);
 
   return (
-    <>
-      <SiteHeader />
+    <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
+      <div className="mx-auto max-w-[1444px]">
+        <Breadcrumb title={project.title} />
 
-      <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
-        <div className="mx-auto max-w-[1444px]">
-          <Breadcrumb title={project.title} />
+        <article>
+          <ArticleHeader project={project} />
 
-          <article>
-            <ArticleHeader project={project} />
-
-            {/* The aspect matches the screenshots' own 1917x865, so `cover` has
-                nothing left to trim. Reshoot at that ratio or this starts
-                cropping the frame again. */}
-            <figure className="mt-[18px]">
-              <div className="relative aspect-[1917/865] overflow-hidden border border-rule-55">
-                <ImageSlot
-                  src={project.imageSrc}
-                  alt={project.imageAlt}
-                  placeholder={project.imageAlt}
-                  priority
-                  sizes="(max-width: 1080px) 94vw, 1400px"
-                />
-                <div className="halftone opacity-[0.24] [background-image:radial-gradient(circle_at_1px_1px,rgba(20,18,15,.85)_0.7px,transparent_1.1px)]" />
-              </div>
-              {project.imageCaption ? (
-                <figcaption className="mt-[7px] border-b border-rule-30 pb-[7px] font-mono text-[calc(11px*var(--ts))] leading-[1.5] text-ink-mute italic">
-                  {project.imageCaption}
-                </figcaption>
-              ) : null}
-            </figure>
-
-            <div className="flex flex-col p1080:grid p1080:grid-cols-[minmax(0,1fr)_clamp(calc(268px*var(--ts)),26.5%,calc(352px*var(--ts)))]">
-              <main className="order-2 min-w-0 p1080:order-1 p1080:pr-[28px]">
-                <ArticleBody project={project} />
-              </main>
-
-              <aside className="order-1 mt-[22px] min-w-0 p1080:order-2 p1080:mt-0 p1080:border-l p1080:border-rule-60 p1080:pl-[28px]">
-                {/* Sticks below the running head once it has slid in, so the
-                    spec sheet stays readable through a long article. */}
-                <div className="p1080:sticky p1080:top-[76px]">
-                  <SpecSheet project={project} />
-                  <StackSheet project={project} />
-                </div>
-              </aside>
+          {/* The aspect matches the screenshots' own 1917x865, so `cover` has
+              nothing left to trim. Reshoot at that ratio or this starts
+              cropping the frame again. */}
+          <figure className="mt-[18px]">
+            <div className="relative aspect-[1917/865] overflow-hidden border border-rule-55">
+              <ImageSlot
+                src={project.imageSrc}
+                alt={project.imageAlt}
+                placeholder={project.imageAlt}
+                priority
+                sizes="(max-width: 1080px) 94vw, 1400px"
+              />
+              <div className="halftone opacity-[0.24] [background-image:radial-gradient(circle_at_1px_1px,rgba(20,18,15,.85)_0.7px,transparent_1.1px)]" />
             </div>
-          </article>
+            {project.imageCaption ? (
+              <figcaption className="mt-[7px] border-b border-rule-30 pb-[7px] font-mono text-[calc(11px*var(--ts))] leading-[1.5] text-ink-mute italic">
+                {project.imageCaption}
+              </figcaption>
+            ) : null}
+          </figure>
 
-          <ContinuedNav previous={previous} next={next} />
+          <div className="flex flex-col p1080:grid p1080:grid-cols-[minmax(0,1fr)_clamp(calc(268px*var(--ts)),26.5%,calc(352px*var(--ts)))]">
+            <main className="order-2 min-w-0 p1080:order-1 p1080:pr-[28px]">
+              <ArticleBody project={project} />
+            </main>
 
-          <footer className="mt-[16px] border-t border-ink pt-[10px] text-center font-mono text-[calc(11.5px*var(--ts))] tracking-[0.02em] text-ink-mute">
-            &copy; 2026 Mihir Jataniya. All thoughts are my own.
-          </footer>
-        </div>
+            <aside className="order-1 mt-[22px] min-w-0 p1080:order-2 p1080:mt-0 p1080:border-l p1080:border-rule-60 p1080:pl-[28px]">
+              {/* Nothing is pinned to the top of these pages, so the rail can
+                  stick right at the edge and stay readable down a long piece. */}
+              <div className="p1080:sticky p1080:top-[18px]">
+                <StackSheet project={project} />
+              </div>
+            </aside>
+          </div>
+        </article>
+
+        <ContinuedNav previous={previous} next={next} />
+
+        <footer className="mt-[16px] border-t border-ink pt-[10px] text-center font-mono text-[calc(11.5px*var(--ts))] tracking-[0.02em] text-ink-mute">
+          &copy; 2026 Mihir Jataniya. All thoughts are my own.
+        </footer>
       </div>
-    </>
+    </div>
   );
 }
 
@@ -210,12 +204,25 @@ function ArticleBody({ project }: { project: Project }) {
         </div>
       </Section>
 
-      <figure className="my-[26px] border-y-2 border-ink py-[18px]">
-        <blockquote className="text-center font-display text-[calc(clamp(17px,2.2vw,27px)*var(--ts))] leading-[1.34] text-ink italic">
-          &ldquo;{project.pullQuote}&rdquo;
-        </blockquote>
-      </figure>
+      <Section label="What it does">
+        <ul className="grid gap-[9px] p-0">
+          {project.features.map((feature) => (
+            <li
+              key={feature.heading}
+              className={`grid list-none grid-cols-[13px_minmax(0,1fr)] gap-[7px] ${paragraphClass}`}
+            >
+              <span aria-hidden="true">&bull;</span>
+              <span>
+                <strong className="font-semibold text-ink">{feature.heading}:</strong>{" "}
+                {feature.body}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Section>
 
+      {/* Last on the page: the reader needs to know what the thing is and how
+          it works before the argument for any given fork means anything. */}
       <Section label="Technical decisions">
         <div className="frame-soft">
           {project.decisions.map((decision, i) => (
@@ -230,47 +237,9 @@ function ArticleBody({ project }: { project: Project }) {
               <dl className="mt-[9px] grid gap-[7px] p600:grid-cols-[62px_minmax(0,1fr)] p600:gap-x-[12px]">
                 <dt className={labelClass}>Chose</dt>
                 <dd className={`m-0 ${paragraphClass}`}>{decision.choice}</dd>
-                <dt className={`${labelClass} p600:mt-0 mt-[4px]`}>Why</dt>
+                <dt className={`${labelClass} mt-[4px] p600:mt-0`}>Why</dt>
                 <dd className={`m-0 ${paragraphClass}`}>{decision.rationale}</dd>
               </dl>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section label="What it does">
-        <div className="grid grid-cols-1 p760:grid-cols-2">
-          {project.features.map((feature, i) => (
-            <div
-              key={feature.heading}
-              className={`border-t border-dashed border-rule-30 py-[11px] ${
-                i % 2 === 1 ? "p760:border-l p760:pl-[15px]" : "p760:pr-[15px]"
-              }`}
-            >
-              <h3 className="font-mono text-[calc(12px*var(--ts))] font-semibold tracking-[0.02em] text-ink">
-                {feature.heading}
-              </h3>
-              <p className={`mt-[4px] ${paragraphClass}`}>{feature.body}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section label="What fought back">
-        <div className="grid gap-[16px]">
-          {project.hurdles.map((hurdle) => (
-            <div key={hurdle.heading}>
-              <h3 className="font-display text-[calc(16px*var(--ts))] font-semibold text-ink">
-                {hurdle.heading}
-              </h3>
-              {hurdle.body.map((paragraph, i) => (
-                <p
-                  key={paragraph.slice(0, 32)}
-                  className={`${paragraphClass} ${i === 0 ? "mt-[7px]" : "mt-[11px]"}`}
-                >
-                  {paragraph}
-                </p>
-              ))}
             </div>
           ))}
         </div>
@@ -315,69 +284,68 @@ function BuildPart({ part, no }: { part: ProjectSection; no: string }) {
   );
 }
 
-function SpecSheet({ project }: { project: Project }) {
-  return (
-    <section className="mt-[22px] p1080:mt-[18px]">
-      <div className="kicker mb-[11px]">Spec sheet</div>
-
-      <div className="frame px-[15px] pt-[12px] pb-[14px]">
-        <dl className="grid gap-[10px]">
-          {project.facts.map((fact) => (
-            <div
-              key={fact.label}
-              className="grid grid-cols-[minmax(62px,0.52fr)_minmax(0,1fr)] items-start gap-[10px]"
-            >
-              <dt className="pt-px font-mono text-[calc(11px*var(--ts))] text-ink-mute">
-                {fact.label}
-              </dt>
-              <dd className="m-0 font-mono text-[calc(11.8px*var(--ts))] leading-[1.5] text-ink-3">
-                {fact.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <div className="dash-rule my-[12px]" />
-
-        <div className="flex flex-wrap gap-[4px]">
-          {project.tags.map((tag) => (
-            <span key={tag} className="tag">
-              {tag}
-            </span>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /**
- * Rides in the rail under the spec sheet, so it uses the same narrow label
- * column the front page's stack table does. Values are kept terse for that
- * measure — anything that needs a clause belongs in the article body instead.
+ * The whole rail. Uses the same narrow label column the front page's stack
+ * table does, so values are kept terse for that measure — anything that needs
+ * a clause belongs in the article body instead.
  */
 function StackSheet({ project }: { project: Project }) {
   return (
-    <section className="mt-[20px]">
-      <div className="kicker mb-[11px]">The stack</div>
+    <section className="mt-[22px] p1080:mt-[18px]">
+      {/* The heading is the summary below a phone; from p1080 the summary is
+          hidden and this kicker takes over, matching every other rail block. */}
+      <div className="kicker mb-[11px] hidden p1080:block">The stack</div>
 
-      <div className="frame px-[15px] pt-[12px] pb-[14px]">
-        <dl className="grid gap-[11px]">
-          {project.stack.map((row) => (
-            <div
-              key={row.label}
-              className="grid grid-cols-[minmax(62px,0.52fr)_minmax(0,1fr)] items-start gap-[10px]"
+      <details className="stack-fold frame group px-[15px] py-[12px] p1080:pb-[14px]">
+        <summary className="flex items-center justify-between gap-[10px]">
+          <span className="kicker">The stack</span>
+          <span className="flex items-center gap-[7px] font-mono text-[calc(10.5px*var(--ts))] tracking-[0.1em] text-ink-mute uppercase">
+            {project.stack.length} rows
+            <svg
+              viewBox="0 0 24 24"
+              width="13"
+              height="13"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+              className="transition-transform duration-200 group-open:rotate-180"
             >
-              <dt className="pt-px font-mono text-[calc(11px*var(--ts))] text-ink-mute">
-                {row.label}
-              </dt>
-              <dd className="m-0 font-mono text-[calc(11.8px*var(--ts))] leading-[1.5] text-ink-3">
-                {row.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-      </div>
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </span>
+        </summary>
+
+        <div className="stack-fold-panel pt-[12px] p1080:pt-0">
+          <dl className="grid gap-[11px]">
+            {project.stack.map((row) => (
+              <div
+                key={row.label}
+                className="grid grid-cols-[minmax(62px,0.52fr)_minmax(0,1fr)] items-start gap-[10px]"
+              >
+                <dt className="pt-px font-mono text-[calc(11px*var(--ts))] text-ink-mute">
+                  {row.label}
+                </dt>
+                <dd className="m-0 font-mono text-[calc(11.8px*var(--ts))] leading-[1.5] text-ink-3">
+                  {row.value}
+                </dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="dash-rule my-[12px]" />
+
+          <div className="flex flex-wrap gap-[4px]">
+            {project.tags.map((tag) => (
+              <span key={tag} className="tag">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </details>
     </section>
   );
 }

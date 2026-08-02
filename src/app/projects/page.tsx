@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
-import SiteHeader from "@/components/SiteHeader";
 import { projectLinks, projects, type Project } from "@/data/projects";
 
 export const metadata: Metadata = {
-  title: "Projects in Print — STDOUT",
+  title: "Projects in Print · STDOUT",
   description:
-    "The full run of projects by Mihir Jataniya — real-time systems, developer tooling and the reasoning behind each build.",
+    "The full run of projects by Mihir Jataniya: real-time systems, developer tooling and the reasoning behind each build.",
   openGraph: {
-    title: "Projects in Print — STDOUT",
+    title: "Projects in Print · STDOUT",
     description: "The full run of projects, with the reasoning behind each build.",
     type: "website",
   },
@@ -17,38 +16,34 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <>
-      <SiteHeader />
+    <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
+      <div className="mx-auto max-w-[1444px]">
+        <SectionMasthead />
 
-      <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
-        <div className="mx-auto max-w-[1444px]">
-          <SectionMasthead />
-
-          <div className="mt-[24px] border-t border-ink">
-            {projects.map((project) => (
-              <ProjectEntry key={project.slug} project={project} />
-            ))}
-          </div>
-
-          <div className="mt-[18px] flex flex-wrap items-center justify-between gap-[12px] border-t border-rule-60 pt-[12px]">
-            <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute italic">
-              Back issues, experiments and dead ends are still being typeset.
-            </span>
-            <Link
-              href="/"
-              className="press-btn px-[17px] py-[9px] text-[calc(11.5px*var(--ts))] tracking-[0.11em]"
-            >
-              <span>&larr;</span>
-              <span>Back to the front page</span>
-            </Link>
-          </div>
-
-          <footer className="mt-[16px] border-t border-ink pt-[10px] text-center font-mono text-[calc(11.5px*var(--ts))] tracking-[0.02em] text-ink-mute">
-            &copy; 2026 Mihir Jataniya. All thoughts are my own.
-          </footer>
+        <div className="mt-[24px] border-t border-ink">
+          {projects.map((project) => (
+            <ProjectEntry key={project.slug} project={project} />
+          ))}
         </div>
+
+        <div className="mt-[18px] flex flex-wrap items-center justify-between gap-[12px] border-t border-rule-60 pt-[12px]">
+          <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute italic">
+            Back issues, experiments and dead ends are still being typeset.
+          </span>
+          <Link
+            href="/"
+            className="press-btn px-[17px] py-[9px] text-[calc(11.5px*var(--ts))] tracking-[0.11em]"
+          >
+            <span>&larr;</span>
+            <span>Back to the front page</span>
+          </Link>
+        </div>
+
+        <footer className="mt-[16px] border-t border-ink pt-[10px] text-center font-mono text-[calc(11.5px*var(--ts))] tracking-[0.02em] text-ink-mute">
+          &copy; 2026 Mihir Jataniya. All thoughts are my own.
+        </footer>
       </div>
-    </>
+    </div>
   );
 }
 

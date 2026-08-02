@@ -314,4 +314,36 @@
     text-decoration: underline;
     text-underline-offset: 2px;
   }
+
+  /* The article's stack rail. On a phone it sits above the copy, so a twenty
+     row table would push the story off the screen — it folds into a native
+     disclosure instead. */
+  .stack-fold > summary {
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .stack-fold > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  /* From p1080 the rail has a column to itself and should always be open.
+     There is no way to set the `open` attribute from CSS, so the panel is
+     forced visible instead. Both rules are needed: browsers used to hide the
+     content with `display`, and now hide it via `::details-content`, so
+     whichever mechanism a given engine uses, one of these overrides it. */
+  @media (width >= 67.5rem) {
+    .stack-fold > summary {
+      display: none;
+    }
+
+    .stack-fold > .stack-fold-panel {
+      display: block;
+    }
+
+    .stack-fold::details-content {
+      content-visibility: visible;
+      block-size: auto;
+    }
+  }
 }

@@ -3,13 +3,16 @@ import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
 import { projectLinks, projects, type Project } from "@/data/projects";
 
+/** The front page runs two cards across. The rest of the archive is /projects. */
+const FRONT_PAGE_COUNT = 2;
+
 export default function Projects() {
   return (
     <section id="print" className="mt-[22px] border-t border-rule-60 pt-[12px]">
       <div className="kicker">Currently in print</div>
 
       <div className="mt-[11px] grid grid-cols-[repeat(auto-fit,minmax(calc(248px*var(--ts)),1fr))] border border-rule-55">
-        {projects.map((project, i) => (
+        {projects.slice(0, FRONT_PAGE_COUNT).map((project, i) => (
           <ProjectCard key={project.no} project={project} first={i === 0} />
         ))}
       </div>

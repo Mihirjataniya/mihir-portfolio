@@ -25,7 +25,7 @@ export const masthead = {
  */
 export const mastheadLinks = [
   { label: "Projects", href: "/projects" },
-  { label: "Blogs", href: "/#notes" },
+  { label: "Blogs", href: "/blogs" },
 ] as const;
 
 export const nav = [
@@ -127,16 +127,6 @@ export const education = {
   years: "2021 – 2025",
 } as const;
 
-export const quickLinks = [
-  { label: "Latest Blog: Building around failure instead of uptime", href: "#print" },
-  { label: "MediaSoup Notes", href: "#print" },
-  { label: "Why I stopped using X", href: "#print" },
-  { label: "How MeetNote evolved", href: "#print" },
-  { label: "Resume (PDF)", href: masthead.resumeHref },
-  { label: "GitHub", href: "#letters" },
-  { label: "LinkedIn", href: "#letters" },
-] as const;
-
 /**
  * The back-page sudoku. Both strings are 81 chars, read left-to-right and
  * top-to-bottom; "." is a blank the reader fills in. Swap in a new pair each
@@ -173,6 +163,23 @@ export const contact = {
   },
   x : { label: "@devwithdelulu", href: "https://x.com/devwithdelulu" },
 } as const;
+
+/**
+ * Sidebar shortcuts. Every entry has to resolve to something that exists —
+ * a real route, a real file, or a real profile. Declared after `contact` so it
+ * can borrow those URLs instead of restating them.
+ */
+export const quickLinks = [
+  { label: "All projects", href: "/projects" },
+  { label: "MeetNote AI", href: "/projects/meetnote-ai" },
+  { label: "HelioKit", href: "/projects/heliokit" },
+  { label: "Puff PDF", href: "/projects/puff-pdf" },
+  { label: "Blogs (in preparation)", href: "/blogs" },
+  { label: "Resume (PDF)", href: masthead.resumeHref },
+  { label: "GitHub", href: contact.github.href },
+  { label: "LinkedIn", href: contact.linkedin.href },
+  { label: "X", href: contact.x.href },
+] as const;
 
 export const colophon = [
   "STDOUT is a personal newspaper published irregularly on the internet.",
