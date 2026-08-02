@@ -16,19 +16,25 @@ export const masthead = {
   resumeFile: "Mihir-Jataniya-Resume.pdf",
 } as const;
 
-/** Right-hand side of the byline strip under the nameplate. */
+/**
+ * Right-hand side of the byline strip under the nameplate.
+ *
+ * These and `nav` below are printed on every page, including /projects, so the
+ * section anchors are root-relative. A bare "#notes" would resolve against
+ * whatever page the reader is on and point at nothing.
+ */
 export const mastheadLinks = [
-  { label: "Projects", href: "#print" },
-  { label: "Blogs", href: "#notes" },
+  { label: "Projects", href: "/projects" },
+  { label: "Blogs", href: "/#notes" },
 ] as const;
 
 export const nav = [
-  { label: "Desk", href: "#desk" },
-  { label: "Experience", href: "#experience" },
-  { label: "Projects", href: "#print" },
-  { label: "Stack", href: "#stack" },
-  { label: "Notes", href: "#notes" },
-  { label: "Letters", href: "#letters" },
+  { label: "Desk", href: "/#desk" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Projects", href: "/projects" },
+  { label: "Stack", href: "/#stack" },
+  { label: "Notes", href: "/#notes" },
+  { label: "Letters", href: "/#letters" },
 ] as const;
 
 export const contents = [
@@ -66,55 +72,8 @@ export const experience = {
   ],
 } as const;
 
-export type Project = {
-  no: string;
-  title: string;
-  imageId: string;
-  imageSrc?: string;
-  imageAlt: string;
-  summary: string;
-  decision: string;
-  implementation: string;
-  live: string;
-  source: string;
-  /** Only for projects that ship a package. */
-  npm?: string;
-  tags: string[];
-};
-
-export const projects: Project[] = [
-  {
-    no: "01",
-    title: "MeetNote AI",
-    imageId: "stdout-proj-1",
-    imageSrc: "/projects/meetnote.webp",
-    imageAlt: "MeetNote AI landing page",
-    summary:
-      "A MediaSoup SFU-powered video conferencing platform featuring an event-driven AI processing pipeline for meeting recordings converted into structured PDFs.",
-    decision: "SFU architecture chosen for efficient media routing and horizontal scalability.",
-    implementation:
-      "Recording, transcription, and summarization run independently through distributed workers.",
-    live: "https://meet-note-ai.vercel.app/",
-    source: "https://github.com/Mihirjataniya/MeetNote-AI",
-    tags: ["MediaSoup", "SQS", "WebRTC", "AWS", "AI", "TypeScript"],
-  },
-  {
-    no: "02",
-    title: "HelioKit",
-    imageId: "stdout-proj-2",
-    imageSrc: "/projects/heliokit.webp",
-    imageAlt: "HelioKit landing page",
-    summary:
-      "An open-source React component library, motion-driven UI components with CLI that automatically detects project frameworks, and installs components directly into existing codebases.",
-    decision: "A CLI-first workflow prioritizes code ownership over package abstraction.",
-    implementation:
-      "Framework-aware installation resolves dependencies and generates ready-to-use components.",
-    live: "https://heliokit.vercel.app/",
-    source: "https://github.com/Mihirjataniya/Heliokit",
-    npm: "https://www.npmjs.com/package/heliokit",
-    tags: ["React", "Framer Motion", "CLI", "npm", "TypeScript"],
-  },
-];
+/* Projects moved to `@/data/projects` — they carry long-form article copy now,
+   and none of it belongs in the file the front page reads. */
 
 export const stack = [
   { label: "Languages", value: "TypeScript, JavaScript, Python, SQL" },

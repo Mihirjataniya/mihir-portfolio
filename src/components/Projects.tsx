@@ -1,5 +1,7 @@
+import { Fragment } from "react";
+import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
-import { projects, type Project } from "@/data/issue";
+import { projectLinks, projects, type Project } from "@/data/projects";
 
 export default function Projects() {
   return (
@@ -16,13 +18,13 @@ export default function Projects() {
         <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute italic">
           More in the archive &mdash; back issues, experiments, dead ends.
         </span>
-        <a
-          href="#print"
+        <Link
+          href="/projects"
           className="press-btn px-[17px] py-[9px] text-[calc(11.5px*var(--ts))] tracking-[0.11em]"
         >
           <span>See all projects</span>
           <span>&rarr;</span>
-        </a>
+        </Link>
       </div>
     </section>
   );
@@ -73,16 +75,15 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
         </div>
       </div>
 
+      {/* Which links exist varies by project — only a published package has an
+          npm entry — so the row is driven off the data rather than hardcoded. */}
       <div className="mt-[12px] flex flex-wrap items-center gap-[9px] font-mono text-[calc(11.5px*var(--ts))]">
-        <ExternalLink href={project.live}>live</ExternalLink>
-        <span className="text-ink-faint">&#8599;</span>
-        <ExternalLink href={project.source}>source</ExternalLink>
-        {project.npm ? (
-          <>
-            <span className="text-ink-faint">&#8599;</span>
-            <ExternalLink href={project.npm}>npm</ExternalLink>
-          </>
-        ) : null}
+        {projectLinks(project).map((link, i) => (
+          <Fragment key={link.label}>
+            {i > 0 ? <span className="text-ink-faint">&#8599;</span> : null}
+            <ExternalLink href={link.href}>{link.label}</ExternalLink>
+          </Fragment>
+        ))}
       </div>
 
       <div className="mt-[9px] flex flex-wrap gap-[4px]">
