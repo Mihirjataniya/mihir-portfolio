@@ -8,9 +8,19 @@ export default function Masthead() {
       <div className="border-t-4 border-ink" />
       <div className="mt-[3px] border-t border-ink" />
 
-      <h1 className="nameplate mt-[16px] text-center text-[calc(clamp(78px,15.5vw,186px)*var(--ts))] leading-[0.92] tracking-[0.015em] text-ink">
-        {masthead.name}
+      {/* The visible nameplate is the publication's wordmark, not the page's
+          subject, so the h1 carries the person and the wordmark is a div. Both
+          are real text either way; only the outline changes. */}
+      <h1 className="sr-only">
+        {masthead.author}, backend and real-time systems engineer
       </h1>
+
+      <div
+        aria-hidden="true"
+        className="nameplate mt-[16px] text-center text-[calc(clamp(78px,15.5vw,186px)*var(--ts))] leading-[0.92] tracking-[0.015em] text-ink"
+      >
+        {masthead.name}
+      </div>
 
       {/* Tagline sits between two double rules. On phones it has to stay on one
           line or the rules get squeezed to nothing, hence the smaller type,

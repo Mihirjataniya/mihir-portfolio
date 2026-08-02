@@ -2,6 +2,7 @@ import EducationBar from "@/components/EducationBar";
 import Experience from "@/components/Experience";
 import FieldNotes from "@/components/FieldNotes";
 import FromTheDesk from "@/components/FromTheDesk";
+import JsonLd from "@/components/JsonLd";
 import Masthead from "@/components/Masthead";
 import Projects from "@/components/Projects";
 import QuadRow from "@/components/QuadRow";
@@ -9,10 +10,50 @@ import QuickLinks from "@/components/QuickLinks";
 import SiteHeader from "@/components/SiteHeader";
 import Sudoku from "@/components/Sudoku";
 import ThisIssue from "@/components/ThisIssue";
+import { contact, education, experience } from "@/data/issue";
+import { SITE, absUrl, sameAs } from "@/data/site";
+
+/** `experience.role` reads "Title, Employer"; the employer is the tail. */
+const employer = experience.role.split(", ").slice(1).join(", ");
+
+/**
+ * `sameAs` is the part that earns its keep: it is how a search engine ties this
+ * site to the GitHub and LinkedIn profiles it already knows about, instead of
+ * treating the name as an unrelated string.
+ */
+const personLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": absUrl("/#person"),
+  name: SITE.author,
+  url: SITE.url,
+  jobTitle: SITE.jobTitle,
+  description: SITE.description,
+  image: absUrl("/Mihir-img.webp"),
+  email: `mailto:${contact.email}`,
+  address: { "@type": "PostalAddress", addressLocality: "Ahmedabad", addressCountry: "IN" },
+  worksFor: { "@type": "Organization", name: employer },
+  alumniOf: { "@type": "CollegeOrUniversity", name: education.school },
+  sameAs,
+};
+
+const websiteLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": absUrl("/#website"),
+  url: SITE.url,
+  name: SITE.name,
+  description: SITE.description,
+  inLanguage: "en",
+  author: { "@id": absUrl("/#person") },
+  publisher: { "@id": absUrl("/#person") },
+};
 
 export default function Home() {
   return (
     <>
+      <JsonLd data={personLd} />
+      <JsonLd data={websiteLd} />
       <SiteHeader />
 
       <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">

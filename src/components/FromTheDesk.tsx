@@ -9,7 +9,7 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
       {/* The masthead's section links are hidden on phones, so they ride the
           first kicker instead — the only nav on a phone above the fold. */}
       <div className="mb-[11px] flex items-center justify-between gap-[12px]">
-        <div className="kicker">From the desk</div>
+        <h2 className="kicker">From the desk</h2>
 
         <nav
           aria-label="Sections"
@@ -28,9 +28,9 @@ export default function FromTheDesk({ showStamp = true }: { showStamp?: boolean 
 
       <div className="frame grid grid-cols-1 gap-[clamp(18px,2.4vw,30px)] px-[clamp(16px,2vw,26px)] pt-[clamp(16px,1.9vw,24px)] pb-[clamp(16px,1.7vw,22px)] p600:grid-cols-[minmax(0,1fr)_clamp(calc(208px*var(--ts)),31%,calc(336px*var(--ts)))]">
         <div className="min-w-0">
-          <h2 className="font-display text-[calc(clamp(26px,3.05vw,40px)*var(--ts))] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
+          <h3 className="font-display text-[calc(clamp(26px,3.05vw,40px)*var(--ts))] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
             The more i learn,<br />  The more i want to Explore
-          </h2>
+          </h3>
 
           <p className="mt-[18px] font-mono text-[calc(13px*var(--ts))] leading-[1.78] text-ink-3 italic">
             I've come to believe that curiosity is less about finding answers and more about staying open to change.

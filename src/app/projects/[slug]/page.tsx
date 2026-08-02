@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ImageSlot from "@/components/ImageSlot";
+import JsonLd from "@/components/JsonLd";
 import { masthead } from "@/data/issue";
+import { SITE, absUrl } from "@/data/site";
 import {
   getProject,
   projectLinks,
@@ -30,15 +32,19 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 
   if (!project) return {};
 
-  const title = `${project.title} · STDOUT`;
+  const path = `/projects/${project.slug}`;
 
   return {
-    title,
+    // The " · STDOUT" suffix comes from the root layout's title template.
+    title: project.title,
     description: project.dek,
+    alternates: { canonical: path },
     openGraph: {
-      title,
+      title: `${project.title} · ${SITE.author}`,
       description: project.dek,
+      url: path,
       type: "article",
+      authors: [SITE.author],
       images: project.imageSrc ? [{ url: project.imageSrc, alt: project.imageAlt }] : undefined,
     },
   };
@@ -51,9 +57,55 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   const { previous, next } = projectNeighbours(project.slug);
+  const path = `/projects/${project.slug}`;
+
+  // The visible breadcrumb and this one have to agree, so both are built from
+  // the same two hops.
+  const trail = [
+    { name: SITE.name, item: absUrl("/") },
+    { name: "Projects", item: absUrl("/projects") },
+    { name: project.title, item: absUrl(path) },
+  ];
+
+  const articleLd = {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "@id": absUrl(`${path}#article`),
+    headline: project.title,
+    description: project.dek,
+    articleSection: "Projects",
+    inLanguage: "en",
+    keywords: project.tags.join(", "),
+    mainEntityOfPage: { "@type": "WebPage", "@id": absUrl(path) },
+    author: { "@id": absUrl("/#person") },
+    publisher: { "@id": absUrl("/#person") },
+    ...(project.imageSrc ? { image: absUrl(project.imageSrc) } : {}),
+    about: {
+      "@type": "SoftwareSourceCode",
+      name: project.title,
+      description: project.summary,
+      programmingLanguage: project.tags[project.tags.length - 1],
+      ...(project.source ? { codeRepository: project.source } : {}),
+      ...(project.live ? { url: project.live } : {}),
+    },
+  };
+
+  const breadcrumbLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: trail.map((hop, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: hop.name,
+      item: hop.item,
+    })),
+  };
 
   return (
     <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
+      <JsonLd data={articleLd} />
+      <JsonLd data={breadcrumbLd} />
+
       <div className="mx-auto max-w-[1444px]">
         <Breadcrumb title={project.title} />
 
@@ -254,10 +306,15 @@ const paragraphClass = "font-mono text-[calc(12.5px*var(--ts))] leading-[1.72] t
 const labelClass =
   "font-mono text-[calc(10.5px*var(--ts))] tracking-[0.11em] text-ink-mute uppercase";
 
+/**
+ * The label is a real `h2`, not a styled div. These are the section titles of
+ * the article ("How it is built", "Technical decisions"), so they have to carry
+ * structural weight; `.kicker` renders identically either way.
+ */
 function Section({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <section className="mt-[24px] border-t border-rule-60 pt-[12px]">
-      <div className="kicker">{label}</div>
+      <h2 className="kicker">{label}</h2>
       <div className="mt-[12px]">{children}</div>
     </section>
   );
@@ -294,7 +351,7 @@ function StackSheet({ project }: { project: Project }) {
     <section className="mt-[22px] p1080:mt-[18px]">
       {/* The heading is the summary below a phone; from p1080 the summary is
           hidden and this kicker takes over, matching every other rail block. */}
-      <div className="kicker mb-[11px] hidden p1080:block">The stack</div>
+      <h2 className="kicker mb-[11px] hidden p1080:block">The stack</h2>
 
       <details className="stack-fold frame group px-[15px] py-[12px] p1080:pb-[14px]">
         <summary className="flex items-center justify-between gap-[10px]">

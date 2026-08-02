@@ -17,7 +17,7 @@ function emphasize(text: string) {
 export default function Experience() {
   return (
     <section id="experience" className="mt-[22px] border-t border-rule-60 pt-[12px]">
-      <div className="kicker">Experience</div>
+      <h2 className="kicker">Experience</h2>
 
       <div className="mt-[12px] flex flex-col items-start justify-between gap-[6px] p600:flex-row p600:items-baseline p600:gap-[24px]">
         <h3 className="font-display text-[calc(clamp(17px,1.7vw,22px)*var(--ts))] font-semibold text-ink">

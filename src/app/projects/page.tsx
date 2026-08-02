@@ -1,30 +1,68 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ImageSlot from "@/components/ImageSlot";
+import JsonLd from "@/components/JsonLd";
 import { projectLinks, projects, type Project } from "@/data/projects";
+import { SITE, absUrl } from "@/data/site";
 
 export const metadata: Metadata = {
-  title: "Projects in Print · STDOUT",
+  title: "Projects in Print",
   description:
     "The full run of projects by Mihir Jataniya: real-time systems, developer tooling and the reasoning behind each build.",
+  alternates: { canonical: "/projects" },
   openGraph: {
-    title: "Projects in Print · STDOUT",
+    title: `Projects in Print · ${SITE.author}`,
     description: "The full run of projects, with the reasoning behind each build.",
+    url: "/projects",
     type: "website",
   },
+};
+
+const collectionLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": absUrl("/projects"),
+  name: "Projects in Print",
+  description: "Every project, with the reasoning behind each build.",
+  inLanguage: "en",
+  isPartOf: { "@id": absUrl("/#website") },
+  about: { "@id": absUrl("/#person") },
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: projects.length,
+    itemListElement: projects.map((project, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: project.title,
+      description: project.dek,
+      url: absUrl(`/projects/${project.slug}`),
+    })),
+  },
+};
+
+const breadcrumbLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: SITE.name, item: absUrl("/") },
+    { "@type": "ListItem", position: 2, name: "Projects", item: absUrl("/projects") },
+  ],
 };
 
 export default function ProjectsPage() {
   return (
     <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
+      <JsonLd data={collectionLd} />
+      <JsonLd data={breadcrumbLd} />
+
       <div className="mx-auto max-w-[1444px]">
         <SectionMasthead />
 
-        <div className="mt-[24px] border-t border-ink">
+        <main className="mt-[24px] border-t border-ink">
           {projects.map((project) => (
             <ProjectEntry key={project.slug} project={project} />
           ))}
-        </div>
+        </main>
 
         <div className="mt-[18px] flex flex-wrap items-center justify-between gap-[12px] border-t border-rule-60 pt-[12px]">
           <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute italic">

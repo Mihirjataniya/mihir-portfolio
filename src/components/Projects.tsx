@@ -9,7 +9,7 @@ const FRONT_PAGE_COUNT = 2;
 export default function Projects() {
   return (
     <section id="print" className="mt-[22px] border-t border-rule-60 pt-[12px]">
-      <div className="kicker">Currently in print</div>
+      <h2 className="kicker">Currently in print</h2>
 
       <div className="mt-[11px] grid grid-cols-[repeat(auto-fit,minmax(calc(248px*var(--ts)),1fr))] border border-rule-55">
         {projects.slice(0, FRONT_PAGE_COUNT).map((project, i) => (
@@ -48,7 +48,7 @@ function ProjectCard({ project, first }: { project: Project; first: boolean }) {
     >
       <div className="flex items-baseline gap-[9px]">
         <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute">{project.no}</span>
-        <h4 className="font-display text-[calc(17px*var(--ts))] font-semibold text-ink">{project.title}</h4>
+        <h3 className="font-display text-[calc(17px*var(--ts))] font-semibold text-ink">{project.title}</h3>
       </div>
 
       {/* The plate runs the full width of the card with the copy underneath —
