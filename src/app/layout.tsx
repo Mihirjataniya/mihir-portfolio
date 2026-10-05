@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Grenze_Gotisch, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
 import { SITE } from "@/data/site";
 import "./globals.css";
@@ -73,7 +74,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       lang="en"
       className={`${playfair.variable} ${plexMono.variable} ${grenzeGotisch.variable} antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
