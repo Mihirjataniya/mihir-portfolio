@@ -174,7 +174,7 @@ export const quickLinks = [
   { label: "MeetNote AI", href: "/projects/meetnote-ai" },
   { label: "HelioKit", href: "/projects/heliokit" },
   { label: "Puff PDF", href: "/projects/puff-pdf" },
-  { label: "Blogs (in preparation)", href: "/blogs" },
+  { label: "Blog: From Prompt to Bill", href: "/blogs" },
   { label: "Resume (PDF)", href: masthead.resumeHref },
   { label: "GitHub", href: contact.github.href },
   { label: "LinkedIn", href: contact.linkedin.href },

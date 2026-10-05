@@ -18,6 +18,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly" as const,
       priority: 0.8,
     })),
-    { url: absUrl("/blogs"), lastModified, changeFrequency: "weekly", priority: 0.4 },
+    {
+      url: absUrl("/blogs/from-prompt-to-bill"),
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.8,
+    },
   ];
 }

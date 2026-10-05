@@ -1,0 +1,228 @@
+/*
+ * The reading room. Deliberately not the newspaper: no grain, no rules, no
+ * blackletter. One quiet column of serif text on a plain warm page.
+ */
+
+/* The paper layers on html/body read --grain-on, so switching it off here
+   removes every texture without touching the rest of the site. */
+:global(html):has(.page) {
+  --grain-on: 0;
+  background: var(--bg);
+  scrollbar-width: thin;
+}
+
+.page {
+  --bg: #faf6ef;
+  --text: #2e2a23;
+  --text-soft: #5a5246;
+  --muted: #8c8270;
+  --line: #e7dfd1;
+  --code-bg: #f2ebdf;
+  --note-bg: #f3ede2;
+  --accent: #8a5a35;
+
+  position: relative;
+  z-index: 10;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-reading), Georgia, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.top {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 28px 20px 0;
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 14px;
+}
+
+.top a {
+  color: var(--muted);
+}
+
+.top a:hover {
+  color: var(--text);
+}
+
+.article {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 56px 20px 40px;
+}
+
+/* ---------- header ---------- */
+
+.title {
+  margin: 0;
+  font-size: clamp(34px, 6vw, 46px);
+  line-height: 1.12;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.dek {
+  margin: 18px 0 0;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--text-soft);
+}
+
+.byline {
+  margin-top: 26px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ---------- body ---------- */
+
+.body {
+  font-size: 19px;
+  line-height: 1.75;
+}
+
+.body p {
+  margin: 1.3em 0 0;
+}
+
+.body h2 {
+  margin: 2.6em 0 0;
+  font-size: 30px;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.body h3 {
+  margin: 2em 0 0;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.body strong {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.body a:hover {
+  color: var(--text);
+}
+
+.body code {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.84em;
+  padding: 0.12em 0.36em;
+  border-radius: 4px;
+  background: var(--code-bg);
+}
+
+.body pre {
+  margin: 1.5em 0 0;
+  padding: 18px 20px;
+  border-radius: 8px;
+  background: var(--code-bg);
+  /* Wrap rather than scroll sideways: a calm read never asks for a side swipe. */
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--text-soft);
+}
+
+.body pre code {
+  padding: 0;
+  background: none;
+  font-size: inherit;
+}
+
+/* Section break: a plain full-width rule, close to the text on both sides. */
+.body hr {
+  margin: 1.6em 0 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.body hr + h2 {
+  margin-top: 1em;
+}
+
+/* Side notes: small detail that adds flavour without breaking the story. */
+.note {
+  margin: 1.6em 0 0;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  background: var(--note-bg);
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-soft);
+}
+
+.note p:first-child {
+  margin-top: 0;
+}
+
+.formula {
+  margin: 1.2em 0 0;
+  text-align: center;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 17px;
+}
+
+/* ---------- footer ---------- */
+
+.end {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 24px 20px 64px;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-size: 14px;
+  color: var(--muted);
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.end a {
+  color: var(--muted);
+}
+
+.end a:hover {
+  color: var(--text);
+}
+
+@media (max-width: 600px) {
+  .article {
+    padding-top: 36px;
+  }
+
+  .body {
+    font-size: 18px;
+  }
+
+  .body h2 {
+    font-size: 26px;
+  }
+
+  .body pre {
+    margin-left: -20px;
+    margin-right: -20px;
+    border-radius: 0;
+    font-size: 13px;
+  }
+}
