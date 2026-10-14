@@ -1,17 +1,41 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import { formatPostDate, posts, type Post } from "@/data/blogs";
 import { SITE, absUrl } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Blogs",
-  description: "System design and engineering writing by Mihir Jataniya. In preparation.",
+  description:
+    "Long-form writing by Mihir Jataniya on system design, LLMs and engineering: how things are put together and what each choice costs.",
   alternates: { canonical: "/blogs" },
   openGraph: {
     title: `Blogs · ${SITE.author}`,
     description: "System design, engineering, and whatever else is worth writing down.",
     url: "/blogs",
     type: "website",
+  },
+};
+
+const collectionLd = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "@id": absUrl("/blogs"),
+  name: "Blogs",
+  description: "System design, engineering, and whatever else is worth writing down.",
+  inLanguage: "en",
+  isPartOf: { "@id": absUrl("/#website") },
+  about: { "@id": absUrl("/#person") },
+  mainEntity: {
+    "@type": "ItemList",
+    numberOfItems: posts.length,
+    itemListElement: posts.map((post, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: post.title,
+      description: post.dek,
+      url: absUrl(`/blogs/${post.slug}`),
+    })),
   },
 };
 
@@ -24,25 +48,10 @@ const breadcrumbLd = {
   ],
 };
 
-/**
- * Placeholder column slots, so the page reads as a layout waiting on copy.
- * Kept broad on purpose: these are standing headings for a section, not a
- * contents list for anything already written.
- */
-const slots = [
-  {
-    no: "01",
-    kicker: "System design",
-    note: "How a thing is put together, and what each choice costs.",
-  },
-  { no: "02", kicker: "Engineering", note: "Whatever was learned the slow way." },
-  { no: "03", kicker: "Ideas", note: "Half formed, written down anyway." },
-  { no: "04", kicker: "Anything else", note: "Not everything worth writing is about code." },
-];
-
 export default function BlogsPage() {
   return (
     <div className="relative z-2 px-[22px] pt-[26px] pb-[30px]">
+      <JsonLd data={collectionLd} />
       <JsonLd data={breadcrumbLd} />
 
       <div className="mx-auto max-w-[1444px]">
@@ -57,7 +66,9 @@ export default function BlogsPage() {
             >
               STDOUT
             </Link>
-            <span className="text-right">Section C &middot; In preparation</span>
+            <span className="text-right">
+              Section C &middot; {posts.length} {posts.length === 1 ? "post" : "posts"}
+            </span>
           </div>
 
           <h1 className="mt-[14px] text-center font-display text-[calc(clamp(38px,7vw,86px)*var(--ts))] leading-[0.98] font-semibold tracking-[-0.012em] text-ink">
@@ -74,65 +85,15 @@ export default function BlogsPage() {
           </div>
         </header>
 
-        <main>
-          {/* The press notice: a newspaper says the page is held, it does not
-              silently print white space. */}
-          <section className="mt-[26px] border border-ink px-[clamp(18px,3vw,40px)] py-[clamp(34px,6vw,72px)] text-center">
-            <div className="kicker">Notice from the composing room</div>
-
-            <h2 className="mt-[13px] font-display text-[calc(clamp(30px,5vw,58px)*var(--ts))] leading-[1.04] font-semibold tracking-[-0.01em] text-ink">
-              Coming soon
-            </h2>
-
-            <p className="mx-auto mt-[15px] max-w-[58ch] font-mono text-[calc(12.5px*var(--ts))] leading-[1.72] text-ink-3">
-              The copy is still with the typesetter. This section will carry system design
-              writing, walking through how something is put together and what each choice
-              costs, along with anything else worth the trouble of explaining properly.
-            </p>
-
-            <div className="mx-auto mt-[20px] flex max-w-[420px] items-center gap-[12px]">
-              <div className="dash-rule flex-1" />
-              <span className="font-mono text-[calc(10.5px*var(--ts))] tracking-[0.14em] text-ink-faint uppercase">
-                Held for copy
-              </span>
-              <div className="dash-rule flex-1" />
-            </div>
-          </section>
-
-          {/* Reserved column slots. Empty frames with only a kicker and a
-              standfirst, the way a page looks before the stories land. */}
-          <div className="mt-[16px] grid grid-cols-1 gap-[14px] p600:grid-cols-2 p860:grid-cols-4">
-            {slots.map((slot) => (
-              <article
-                key={slot.no}
-                className="border border-dashed border-rule-45 px-[15px] pt-[13px] pb-[16px]"
-              >
-                <div className="flex items-baseline gap-[9px]">
-                  <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-faint">
-                    {slot.no}
-                  </span>
-                  <span className="kicker kicker-sm">{slot.kicker}</span>
-                </div>
-
-                <div className="mt-[11px] font-display text-[calc(15px*var(--ts))] leading-[1.4] text-ink-2 italic">
-                  {slot.note}
-                </div>
-
-                {/* Blank rules standing in for the unset text. */}
-                <div className="mt-[13px] grid gap-[8px]" aria-hidden="true">
-                  <div className="h-px bg-rule-30" />
-                  <div className="h-px bg-rule-30" />
-                  <div className="h-px w-[72%] bg-rule-30" />
-                  <div className="h-px w-[45%] bg-rule-30" />
-                </div>
-              </article>
-            ))}
-          </div>
+        <main className="mt-[24px] border-t border-ink">
+          {posts.map((post, i) => (
+            <PostEntry key={post.slug} post={post} no={posts.length - i} />
+          ))}
         </main>
 
         <div className="mt-[18px] flex flex-wrap items-center justify-between gap-[12px] border-t border-rule-60 pt-[12px]">
           <span className="font-mono text-[calc(11.5px*var(--ts))] text-ink-mute italic">
-            Until then, there is long-form writing on the project pages.
+            More copy is with the typesetter.
           </span>
           <div className="flex flex-wrap items-center gap-[12px]">
             <Link
@@ -156,6 +117,51 @@ export default function BlogsPage() {
         </footer>
       </div>
     </div>
+  );
+}
+
+/** One post on the list: numbered oldest-first, so a post keeps its number as new ones land. */
+function PostEntry({ post, no }: { post: Post; no: number }) {
+  const href = `/blogs/${post.slug}`;
+
+  return (
+    <article className="border-b border-rule-55 py-[clamp(18px,2.2vw,28px)]">
+      <div className="flex flex-wrap items-baseline gap-x-[10px] gap-y-[4px] font-mono text-[calc(11px*var(--ts))] tracking-[0.09em] text-ink-mute uppercase">
+        <span>{String(no).padStart(2, "0")}</span>
+        <span className="text-ink-faint">&bull;</span>
+        <time dateTime={post.published}>{formatPostDate(post.published)}</time>
+        <span className="text-ink-faint">&bull;</span>
+        <span>{post.readMinutes} min read</span>
+      </div>
+
+      <h2 className="mt-[7px] max-w-[24ch] font-display text-[calc(clamp(24px,3vw,38px)*var(--ts))] leading-[1.08] font-semibold tracking-[-0.008em] text-ink">
+        <Link href={href} className="hover:text-accent">
+          {post.title}
+        </Link>
+      </h2>
+
+      <p className="mt-[9px] max-w-[70ch] font-display text-[calc(clamp(14px,1.5vw,17px)*var(--ts))] leading-[1.5] text-ink-2 italic">
+        {post.dek}
+      </p>
+
+      <div className="mt-[12px] flex flex-wrap gap-[4px]">
+        {post.tags.map((tag) => (
+          <span key={tag} className="tag">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div className="mt-[14px]">
+        <Link
+          href={href}
+          className="press-btn px-[16px] py-[9px] text-[calc(11.5px*var(--ts))] tracking-[0.11em]"
+        >
+          <span>Read the post</span>
+          <span>&rarr;</span>
+        </Link>
+      </div>
+    </article>
   );
 }
 

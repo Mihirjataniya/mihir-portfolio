@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
+import { formatPostDate, getPost } from "@/data/blogs";
 import { SITE, absUrl } from "@/data/site";
-import styles from "./post.module.css";
+import styles from "../post.module.css";
 
 // Reading fonts are scoped to this page, so the rest of the site keeps its press type.
 const reading = Source_Serif_4({
@@ -22,10 +23,10 @@ const ui = Inter({
 });
 
 const PATH = "/blogs/from-prompt-to-bill";
-const TITLE = "From Prompt to Bill: The Life of One LLM Call";
-const DEK =
-  "One line of code, half a second of waiting, and a bill at the end of the month. What actually happens in between, from tokens to tail latency.";
-const PUBLISHED = "2026-10-05";
+const post = getPost("from-prompt-to-bill");
+const TITLE = post.title;
+const DEK = post.dek;
+const PUBLISHED = post.published;
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -73,7 +74,7 @@ export default function FromPromptToBill() {
       <JsonLd data={articleLd} />
 
       <nav className={styles.top}>
-        <Link href="/">&larr; {SITE.author}</Link>
+        <Link href="/blogs">&larr; All posts</Link>
       </nav>
 
       <article className={styles.article}>
@@ -81,7 +82,7 @@ export default function FromPromptToBill() {
           <h1 className={styles.title}>{TITLE}</h1>
           <p className={styles.dek}>{DEK}</p>
           <div className={styles.byline}>
-            {SITE.author} &middot; October 5, 2026 &middot; 14 min read
+            {SITE.author} &middot; {formatPostDate(PUBLISHED)} &middot; {post.readMinutes} min read
           </div>
         </header>
 
