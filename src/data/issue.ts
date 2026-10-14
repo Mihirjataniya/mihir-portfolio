@@ -55,19 +55,22 @@ export const contents = [
 ] as const;
 
 export const experience = {
-  role: "MERN Stack Developer, GlitchOver",
+  role: "Full Stack Developer, Glitch Over",
   period: "Feb 2025 – Present",
   location: "Ahmedabad, India",
   bullets: [
-    "Built a scalable **payment** microservice with full ACID transaction guarantees (MongoDB transactions) handling core money-movement logic for a platform serving 5,000+ daily active users.",
+    "Contributed to building a platform that takes **streamer and fan interaction** to the next level through highly animated, **real-time UIs**, serving **5,000+ daily active users**.",
+    "Built a **multi-provider payment** system on **Razorpay and Cashfree** that auto-routes each transaction to the provider with the higher live success rate, with full **ACID** transaction guarantees (MongoDB transactions) on all money movement.",
     "Secured the payment-gateway **webhook ingestion** pipeline across 3 providers with **HMAC-SHA256** timing-safe signature verification and idempotent order-status checks, eliminating replay attacks and duplicate wallet credits during gateway retry storms.",
-    "Built a customer-support chatbot on a **RAG + LLM** pipeline with automatic escalation to human agents, deflecting 70% of routine queries while routing complex ones.",
-    "Engineered **real-time** systems over WebSockets for a gig-based platform, including live queue management and presence, keeping state synchronized across **1,000+ concurrent** users with sub-second updates.",
-    "Cut API **p95** latency by **40%** and reduced database load by caching slow-changing data in Redis and replacing raw MongoDB queries with **aggregation pipelines**.",
+    "Built a customer-support bot on **RAG** with multi-source internal search (**vector + keyword**, MongoDB Atlas Vector Search) that auto-escalates to a human executive on failure, deflecting **70%** of routine queries.",
+    "Made the backend **stateless** and **horizontally scalable**, using a **Redis adapter (pub/sub)** to fan out Socket.IO events across servers, keeping live queue management and presence in sync for **1,000+ concurrent** users with sub-second updates.",
+    "Improved perceived speed based on user feedback on lag by **reducing network round trips**: Redis caching, batched API calls, optimistic UI updates and CDN edge caching, cutting API **p95** latency by **40%**.",
+    "Designed scalable **NoSQL schemas** on MongoDB (embedding vs. referencing, indexes on hot paths), with **aggregation pipelines** powering fast queries across all read paths.",
     "Redesigned the slot-booking **UI/UX** around a clearer availability and confirmation flow, reducing booking-confusion failures by **90%**.",
+    "Designed **UI/UX** that makes the platform a richer entertainment medium for streamers and viewers, including **OBS overlays** that render fan-triggered animated actions and alerts live on stream, and a **Discord event-reporting bot**.",
+    "Built separate social-profile and gaming-profile **factories**, each platform an **adapter** handling auth, fetching and normalisation, so a new platform is one adapter and zero core changes.",
     "Moved social-profile **scraping** and third-party integrations onto a **queue + message-broker architecture (AWS SQS)**, making high-volume asynchronous processing reliable and retryable.",
     "Built a scalable **notification service** fanning out email, push, in-app, and Discord alerts from a single event contract, with templating, per-user preferences, idempotent delivery, and retry with dead-letter handling — sustaining **50,000+ notifications/day** at **99.9%** delivery.",
-    "Shipped internal creator **tooling** that surfaces real-time platform events: a **Discord event-reporting bot** and **OBS-integrated live streaming overlays.**",
     "Designed a **role-based access control** (RBAC) admin panel used across Finance, Partnerships, Marketing, Operations, and Engineering, enabling secure permission management and internal workflows.",
   ],
 } as const;
@@ -76,18 +79,23 @@ export const experience = {
    and none of it belongs in the file the front page reads. */
 
 export const stack = [
-  { label: "Languages", value: "TypeScript, JavaScript, Python, SQL" },
+  { label: "Languages", value: "TypeScript, JavaScript, Python, Java, SQL" },
   {
     label: "Frontend",
     value: "React, Next.js, Tailwind CSS, Redux, Zustand, TanStack Query",
   },
-  { label: "Backend", value: "Node.js, Express, REST APIs, WebSocket" },
-  { label: "Databases", value: "MongoDB, PostgreSQL, Redis, Vector Databases" },
+  { label: "Backend", value: "Node.js, Express, REST APIs, WebSockets, Socket.IO" },
+  { label: "Databases", value: "MongoDB, PostgreSQL, Redis, pgvector, Vector Databases" },
   {
     label: "Infrastructure",
-    value: "Docker, Amplify, Cloudflare, EC2, CI/CD, Storage Buckets, Logging & APMs, DNS Management",
+    value:
+      "Docker, AWS EC2, SQS, IAM, Amplify, Cloudflare, CI/CD, Storage Buckets, Logging & APMs, DNS Management",
   },
-  { label: "AI", value: "RAG, LLM Integrations, Transformers, Tokenization, Prompt Design" },
+  {
+    label: "AI / LLM",
+    value:
+      "LLM APIs, Tool Calling, Structured Output, RAG, Embeddings, Vector Search, Prompt Engineering, LLM Fallback, LangChain, LangGraph, Transformers, Tokenization",
+  },
   {
     label: "Architecture",
     value:

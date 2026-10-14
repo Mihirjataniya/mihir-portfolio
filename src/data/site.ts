@@ -11,12 +11,12 @@ export const SITE = {
   url: "https://mihir.site",
   name: masthead.name,
   author: masthead.author,
-  jobTitle: "Backend and real-time systems engineer",
+  jobTitle: "Software engineer: applied AI, backend and real-time systems",
   locale: "en_US",
   /** Handle without the leading @, used to build both the profile URL and the card tag. */
   twitterHandle: "devwithdelulu",
   description:
-    "A personal engineering newspaper. Backend, real-time systems and infrastructure work by Mihir Jataniya.",
+    "A personal engineering newspaper. Applied AI, backend, real-time systems and infrastructure work by Mihir Jataniya.",
 } as const;
 
 /** Absolute URL for a site-relative path. */
