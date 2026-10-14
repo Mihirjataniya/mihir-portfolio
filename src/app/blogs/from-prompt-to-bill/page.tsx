@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Source_Serif_4 } from "next/font/google";
 import Link from "next/link";
 import JsonLd from "@/components/JsonLd";
 import { formatPostDate, getPost } from "@/data/blogs";
 import { SITE, absUrl } from "@/data/site";
+import { reading, ui } from "../fonts";
 import styles from "../post.module.css";
-
-// Reading fonts are scoped to this page, so the rest of the site keeps its press type.
-const reading = Source_Serif_4({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-reading",
-  display: "swap",
-});
-
-const ui = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-ui",
-  display: "swap",
-});
 
 const PATH = "/blogs/from-prompt-to-bill";
 const post = getPost("from-prompt-to-bill");
